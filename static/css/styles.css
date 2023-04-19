@@ -11,8 +11,16 @@ body {
     background-color: #2bfc82;
 }
 
+.bg-color-2 {
+    background-color: #000;
+}
+
 .txt-color-1 {
     color: #2bfc82;
+}
+
+.txt-color-2 {
+    color: #fff;
 }
 
 /*--------------------------------------------------------- Navbar */
