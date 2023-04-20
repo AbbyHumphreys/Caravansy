@@ -20,6 +20,10 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+def home():
+    return render_template("home.html")
+
+
 @app.route("/get_listings")
 def get_listings():
     listings = mongo.db.listings.find()
