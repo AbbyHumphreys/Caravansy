@@ -5,6 +5,10 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 if os.path.exists("env.py"):
     import env
 
@@ -15,9 +19,16 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+app.config["UPLOAD_FOLDER"] = "static/uploads"
+
+
+cloudinary.config(cloud_name=os.getenv("CLOUD_NAME"),
+                api_key=os.getenv("API_KEY"),
+                api_secret=os.getenv("API_SECRET"))
 
 
 mongo = PyMongo(app)
+ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "gif"]
 
 
 @app.route("/")
@@ -86,7 +97,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/profile/<username>",methods=["GET", "POST"])
+@app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # find current user's username from the db
     username = mongo.db.users.find_one(
@@ -98,6 +109,23 @@ def profile(username):
 def get_listings():
     listings = mongo.db.listings.find()
     return render_template("listings.html", listings=listings)
+
+
+@app.route("/add_listing", methods=["GET", "POST"])
+def add_listing():
+    if request.method == "POST":
+        image = request.files["image"]
+        image_upload = cloudinary.uploader.upload(image, public_id="olympic_flag")
+        listing = {
+            "make": request.form.get("make"),
+            "model": request.form.get("model"),
+            "description": request.form.get("description"),
+            "image": image
+        }
+        mongo.db.listings.insert_one(listing)
+        flash("Listing Added")
+        return redirect(url_for("get_listings"))
+    return render_template("addlisting.html")
 
 
 if __name__ == "__main__":
