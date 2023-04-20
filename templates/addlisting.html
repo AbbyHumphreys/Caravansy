@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section>
+    <h2>Add Caravan Listing</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="make" class="form-label">Make:</label>
+            <input type="text" class="form-control" id="make" name="make" aria-describedby="caravanmake" required>
+        </div>
+        <div class="mb-3">
+            <label for="model" class="form-label">Model</label>
+            <input type="text" class="form-control" id="model" name="model" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" aria-label="description" id="description" name="description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Browse</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+
+{% endblock %}
