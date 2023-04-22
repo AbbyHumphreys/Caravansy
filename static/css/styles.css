@@ -59,3 +59,12 @@ body {
     color:#2bfc82;
     font-weight: 700;
 }
+
+.image-card {
+    max-height: 200px;
+}
+
+.paragraph-card {
+    font-weight: 300;
+    font-size: 0.8em;
+}
