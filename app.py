@@ -114,13 +114,15 @@ def get_listings():
 @app.route("/add_listing", methods=["GET", "POST"])
 def add_listing():
     if request.method == "POST":
-        image = request.files["image"]
-        image_upload = cloudinary.uploader.upload(image, public_id="olympic_flag")
+        image_to_upload = request.files["image"]
+        if image_to_upload:
+            image_upload = cloudinary.uploader.upload(
+                image_to_upload, upload_preset="ulau1prq")
         listing = {
             "make": request.form.get("make"),
             "model": request.form.get("model"),
             "description": request.form.get("description"),
-            "image": image
+            "image": image_upload["secure_url"]
         }
         mongo.db.listings.insert_one(listing)
         flash("Listing Added")
