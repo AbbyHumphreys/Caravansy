@@ -121,6 +121,12 @@ def add_listing():
         listing = {
             "make": request.form.get("make"),
             "model": request.form.get("model"),
+            "length": request.form.get("length"),
+            "width": request.form.get("width"),
+            "price": request.form.get("price"),
+            "beds": request.form.get("beds"),
+            "sleeps": request.form.get("sleeps"),
+            "location": request.form.get("location"),
             "description": request.form.get("description"),
             "image": image_upload["secure_url"]
         }
