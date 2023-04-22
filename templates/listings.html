@@ -1,21 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for listing in listings %}
 
-    <div class="card" style="width: 18rem;">
-        <img src="{{ url_for('static', filename='images/swift-vendee-external.webp') }}" class="card-img-top" alt="swift vendee">
-        <div class="card-img-overlay ">
-            <h5 class="card-overlay-text txt-color-2 align-items-baseline">£12,000</h5>
-          </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ listing.make}} {{ listing.model }}</h5>
-            <p class="card-text">
-                {{ listing.description }}
-            </p>
-            <a href="#" class="btn btn-primary">See More</a>
+    <div class="container-fluid">
+        <div class="row">
+            {% for listing in listings %}
+                <div class="col-lg-3">
+                    <div class="card h-100">
+                        <img src="{{ listing.image }}" class="card-img-top"
+                            alt="static caravan">
+                        <div class="card-img-overlay ">
+                            <h5 class="card-overlay-text txt-color-2 align-items-baseline">£12,000</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ listing.make}} {{ listing.model }}</h5>
+                            <p class="card-text">
+                                {{ listing.description }}
+                            </p>
+                            <a href="#" class="btn btn-primary">See More</a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
 
 {% endblock %}
 
