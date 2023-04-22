@@ -9,15 +9,39 @@
             <input type="text" class="form-control" id="make" name="make" aria-describedby="caravanmake" required>
         </div>
         <div class="mb-3">
-            <label for="model" class="form-label">Model</label>
+            <label for="model" class="form-label">Model:</label>
             <input type="text" class="form-control" id="model" name="model" required>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <label for="price" class="form-label">Price (£):</label>
+            <input type="number" class="form-control" id="price" name="price" minlength="1" maxlength="8" required>
+        </div>
+        <div class="mb-3">
+            <label for="beds" class="form-label">Bedrooms:</label>
+            <input type="number" class="form-control" id="beds" name="beds" minlength="1" maxlength="1" required>
+        </div>
+        <div class="mb-3">
+            <label for="sleeps" class="form-label">Sleeps:</label>
+            <input type="number" class="form-control" id="sleeps" name="sleeps" minlength="1" maxlength="2" required>
+        </div>
+        <div class="mb-3">
+            <label for="length" class="form-label">Length (ft):</label>
+            <input type="number" class="form-control" id="length" name="length" minlength="2" maxlength="2" required>
+        </div>
+        <div class="mb-3">
+            <label for="width" class="form-label">Width (ft):</label>
+            <input type="number" class="form-control" id="width" name="width" minlength="2" maxlength="2" required>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price (£):</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
             <textarea class="form-control" aria-label="description" id="description" name="description" required></textarea>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Browse</label>
+            <label for="image" class="form-label">Upload Image:</label>
             <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
