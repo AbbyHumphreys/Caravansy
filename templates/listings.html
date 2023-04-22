@@ -4,22 +4,31 @@
     <div class="container-fluid">
         <div class="row">
             {% for listing in listings %}
-                <div class="col-lg-3">
+                <div class="col-lg-3 mb-3">
                     <div class="card h-100">
-                        <img src="{{ listing.image }}" class="card-img-top"
+                        <img src="{{ listing.image }}" class="card-img-top image-card"
                             alt="static caravan">
                         <div class="card-img-overlay ">
-                            <h5 class="card-overlay-text txt-color-2 align-items-baseline">£12,000</h5>
+                            <h5 class="card-overlay-text txt-color-2">£{{ listing.price }}</h5>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ listing.make}} {{ listing.model }}</h5>
-                            <p class="card-text">
-                                {{ listing.description }}
-                            </p>
+                            <p class="paragraph-card">Size: {{ listing.length }}ft x {{ listing.width }}ft</p>
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <i class="fa-solid fa-bed me-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Bedrooms"></i>
+                                    {{ listing.beds }}
+                                </div>
+                                <div class="col-4">
+                                    <i class="fa-solid fa-users me-3"></i> 
+                                    {{ listing.sleeps }}
+                                </div>
+                                <div class="col-4">
+                                    <i class="fa-solid fa-location-dot me-3"></i>
+                                    {{ listing.location }}
+                                </div>
+                            </div>
                             <a href="#" class="btn btn-primary">See More</a>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-body-secondary">Last updated 3 mins ago</small>
                         </div>
                     </div>
                 </div>
