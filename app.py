@@ -111,6 +111,12 @@ def get_listings():
     return render_template("listings.html", listings=listings)
 
 
+@app.route("/display_listing/<listing_id>")
+def display_listing(listing_id):
+    listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
+    return render_template("listing.html", listing=listing)
+
+
 @app.route("/add_listing", methods=["GET", "POST"])
 def add_listing():
     if request.method == "POST":
