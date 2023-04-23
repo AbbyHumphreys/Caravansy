@@ -133,7 +133,13 @@ def add_listing():
         mongo.db.listings.insert_one(listing)
         flash("Listing Added")
         return redirect(url_for("get_listings"))
-    return render_template("addlisting.html")
+    return render_template("add_listing.html")
+
+
+@app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
+def edit_listing(listing_id):
+    listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
+    return render_template("edit_listing.html", listing=listing)
 
 
 if __name__ == "__main__":
