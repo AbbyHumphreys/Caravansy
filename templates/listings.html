@@ -35,7 +35,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <a href="{{ url_for('add_listing') }}" class="btn btn-primary card-link">See More</a>
+                                    <a href="{{ url_for('display_listing', listing_id=listing._id) }}" class="btn btn-primary card-link">See More</a>
                                 </div>
                                 <div class="col-6 text-end">
                                     {% if session.user|lower == listing.created_by|lower %}
