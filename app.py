@@ -164,6 +164,13 @@ def edit_listing(listing_id):
     return render_template("edit_listing.html", listing=listing)
 
 
+@app.route("/delete_listing/<listing_id>")
+def delete_listing(listing_id):
+    mongo.db.listings.delete_one({"_id": ObjectId(listing_id)})
+    flash("Listing Deleted")
+    return redirect(url_for("get_listings"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
             port=int(os.environ.get("PORT")),
