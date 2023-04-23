@@ -128,7 +128,8 @@ def add_listing():
             "sleeps": request.form.get("sleeps"),
             "location": request.form.get("location"),
             "description": request.form.get("description"),
-            "image": image_upload["secure_url"]
+            "image": image_upload["secure_url"],
+            "created_by": session["user"]
         }
         mongo.db.listings.insert_one(listing)
         flash("Listing Added")
@@ -138,6 +139,27 @@ def add_listing():
 
 @app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
 def edit_listing(listing_id):
+    if request.method == "POST":
+        image_to_upload = request.files["image"]
+        if image_to_upload:
+            image_upload = cloudinary.uploader.upload(
+                image_to_upload, upload_preset="ulau1prq")
+        submit = {
+            "make": request.form.get("make"),
+            "model": request.form.get("model"),
+            "length": request.form.get("length"),
+            "width": request.form.get("width"),
+            "price": request.form.get("price"),
+            "beds": request.form.get("beds"),
+            "sleeps": request.form.get("sleeps"),
+            "location": request.form.get("location"),
+            "description": request.form.get("description"),
+            "image": image_upload["secure_url"],
+            "created_by": session["user"]
+        }
+        mongo.db.listings.update_one({"_id": ObjectId(listing_id)}, {"$set": submit})
+        flash("Listing Updated")
+        return redirect(url_for("get_listings"))
     listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
     return render_template("edit_listing.html", listing=listing)
 
