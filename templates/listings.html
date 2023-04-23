@@ -8,11 +8,16 @@
                     <div class="card h-100">
                         <img src="{{ listing.image }}" class="card-img-top image-card"
                             alt="static caravan">
-                        <div class="card-img-overlay ">
-                            <h5 class="card-overlay-text txt-color-2">£{{ listing.price }}</h5>
-                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ listing.make}} {{ listing.model }}</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="card-title">{{ listing.make}} {{ listing.model }}</h5>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <h5 class="card-title">£{{ listing.price }}</h5>
+                                </div>
+                            </div>
+                            
                             <p class="paragraph-card">Size: {{ listing.length }}ft x {{ listing.width }}ft</p>
                             <div class="row mb-3">
                                 <div class="col-4">
@@ -30,20 +35,19 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <a href="#" class="btn btn-primary">See More</a>
+                                    <a href="{{ url_for('add_listing') }}" class="btn btn-primary card-link">See More</a>
                                 </div>
                                 <div class="col-6 text-end">
                                     {% if session.user|lower == listing.created_by|lower %}
-                                        <a href="{{ url_for('edit_listing', listing_id=listing._id) }}" class="btn">
+                                        <a href="{{ url_for('edit_listing', listing_id=listing._id) }}" class="card-link">
                                             <i class="fa-regular fa-pen-to-square txt-color-1"></i>
                                         </a>
-                                        <a href="#" class="btn">
+                                        <a href="{{ url_for('delete_listing', listing_id=listing._id) }}" class="card-link">
                                             <i class="fa-solid fa-trash-can txt-color-1"></i>
                                         </a>
                                     {% endif %}
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
