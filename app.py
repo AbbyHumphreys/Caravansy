@@ -177,6 +177,17 @@ def delete_listing(listing_id):
     return redirect(url_for("get_listings"))
 
 
+@app.route("/get_features")
+def get_features():
+    features = list(mongo.db.features.find().sort("feature_name", 1))
+    return render_template("features.html", features=features)
+
+
+@app.route("/add_feature")
+def add_feature():
+    return render_template("add_feature.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
             port=int(os.environ.get("PORT")),
