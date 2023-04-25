@@ -7,7 +7,11 @@
                 <h1 class="ms-5">Profile</h1>
                 <h2>Welcome {{ username }}</h2>
                 <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('add_listing') }}" role="button">Add Caravan Listing</a>
-            </div>
+                {% if session.user|lower == "admin"|lower %}
+                    <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('get_features') }}" role="button">Features List</a>
+                    <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('add_feature') }}" role="button">Add Feature</a>
+                {% endif %}
+                </div>
             <div class="col-12 col-lg-6">
                 <img src="{{ url_for('static', filename='images/register-image.webp') }}" class="img-fluid w-75 mx-auto d-block" alt="couple in a caravan">
             </div>
