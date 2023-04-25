@@ -195,6 +195,21 @@ def add_feature():
     return render_template("add_feature.html")
 
 
+@app.route("/edit_feature/<feature_id>", methods=["GET", "POST"])
+def edit_feature(feature_id):
+    if request.method == "POST":
+        submit = {
+            "feature_name": request.form.get("feature_name")
+        }
+        mongo.db.features.update_one(
+            {"_id": ObjectId(feature_id)}, {"$set": submit})
+        flash("Feature Updated")
+        return redirect(url_for("get_features"))
+
+    feature = mongo.db.features.find_one({"_id": ObjectId(feature_id)})
+    return render_template("edit_feature.html", feature=feature)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
             port=int(os.environ.get("PORT")),
