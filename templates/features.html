@@ -5,10 +5,10 @@
         <div class="row mb-5">
             <div class="col text-center">
                 <h1 class="mb-5">Features List</h1>
-                    <div class="card w-50 mx-auto rounded-0 border-2 border-color-1">
-                        <ul class="list-group list-group-flush">
+                    <div class="card w-50 mx-auto border-0 rounded-0">
+                        <ul class="list-group list-group-flush ">
                             {% for feature in features %}
-                          <li class="list-group-item d-inline-flex justify-content-between border-bottom-2 border-color-1">
+                          <li class="list-group-item d-inline-flex justify-content-between border-3 border-color-1 rounded-0 mb-1">
                             <h4><i class="fa-solid fa-tag pe-2"></i>{{ feature.feature_name|upper}}</h4>
                             <div class="dropdown">
                                 <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
