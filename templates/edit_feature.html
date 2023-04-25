@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Edit Feature</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <form method="POST" action="{{ url_for('edit_feature', feature_id=feature._id) }}"class="mb-5">
+                    <div class="mb-3">
+                        <label for="feature_name" class="form-label">Feature</label>
+                        <input type="text" class="form-control" value="{{ feature.feature_name }}" id="feature_name" name="feature_name" aria-describedby="feature" required>
+                    </div>
+                    <a href="{{ url_for('get_listings') }}" class="btn btn-danger">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
