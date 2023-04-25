@@ -210,6 +210,14 @@ def edit_feature(feature_id):
     return render_template("edit_feature.html", feature=feature)
 
 
+@app.route("/delete_feature/<feature_id>")
+def delete_feature(feature_id):
+    mongo.db.features.delete_one({"_id": ObjectId(feature_id)})
+    flash("Feature Deleted")
+    return redirect(url_for("get_features"))
+
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
             port=int(os.environ.get("PORT")),
