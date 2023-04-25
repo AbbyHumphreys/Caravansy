@@ -183,8 +183,15 @@ def get_features():
     return render_template("features.html", features=features)
 
 
-@app.route("/add_feature")
+@app.route("/add_feature", methods=["GET", "POST"])
 def add_feature():
+    if request.method == "POST":
+        feature = {
+            "feature_name": request.form.get("feature_name")
+        }
+        mongo.db.features.insert_one(feature)
+        flash("New Feature Added")
+        return redirect(url_for("get_features"))
     return render_template("add_feature.html")
 
 
