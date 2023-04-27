@@ -105,6 +105,21 @@ def profile(username):
     return render_template("profile.html", username=username)
 
 
+@app.route("/edit_users/<user_id>", methods=["GET", "POST"])
+def edit_users(user_id):
+    if request.method == "POST":
+        is_superuser = "on" if request.form.get("is_superuser") else "off"
+        apply = {
+            "is_superuser": is_superuser
+        }
+        mongo.db.users.update_one({"_id": ObjectId(user_id)}, {"$set": apply})
+        flash("User Update Applied")
+        users = list(mongo.db.users.find())  # Fetch the updated user list
+        return render_template("edit_users.html", users=users)
+    users = list(mongo.db.users.find())
+    return render_template("edit_users.html", users=users)
+
+
 @app.route("/get_listings")
 def get_listings():
     listings = mongo.db.listings.find()
