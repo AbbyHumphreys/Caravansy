@@ -135,12 +135,15 @@ def add_listing():
             "location": request.form.get("location"),
             "description": request.form.get("description"),
             "image": image_upload["secure_url"],
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "features": request.form.getlist("features")
         }
         mongo.db.listings.insert_one(listing)
         flash("Listing Added")
         return redirect(url_for("get_listings"))
-    return render_template("add_listing.html")
+    features = mongo.db.features.find().sort("feature_name", 1)
+    print(features)
+    return render_template("add_listing.html", features=features)
 
 
 @app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
@@ -179,7 +182,7 @@ def delete_listing(listing_id):
 
 @app.route("/get_features")
 def get_features():
-    features = list(mongo.db.features.find().sort("feature_name", 1))
+    features = mongo.db.features.find()
     return render_template("features.html", features=features)
 
 
@@ -205,7 +208,6 @@ def edit_feature(feature_id):
             {"_id": ObjectId(feature_id)}, {"$set": submit})
         flash("Feature Updated")
         return redirect(url_for("get_features"))
-
     feature = mongo.db.features.find_one({"_id": ObjectId(feature_id)})
     return render_template("edit_feature.html", feature=feature)
 
