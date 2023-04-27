@@ -18,6 +18,9 @@
                 <h1>£{{ listing.price }}</h1>
                 <h2>{{ listing.make|capitalize }} {{ listing.model|capitalize }}</h2>
                 <p>{{ listing.location|capitalize }}</p>
+                {% for feature in listing.features %}
+                <p>{{ feature }}</p>
+                {% endfor %}
             </div>
             <div class="col-12 col-lg-4">
 
