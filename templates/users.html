@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row mb-5">
+            <div class="col text-center">
+                <h1 class="mb-5">Users List</h1>
+                <div class="card w-50 mx-auto border-0 rounded-0">
+                    <ul class="list-group list-group-flush ">
+                        {% for user in users %}
+                        <li class="list-group-item d-flex border-3 border-color-1 rounded-0 mb-1">
+                            <h4 class="me-auto mb-0 align-self-center"><i class="fa-solid fa-user align-self-center p-2"></i> {{ user.username|upper}}</h4>
+                            {% if user.is_superuser == "on" %}
+                            <p class="pe-2 mb-0 align-self-center">Super User</p>
+                            {% endif %}
+                            <form method="POST" action="{{ url_for('get_users') }}" >
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0" type="button"
+                                      data-bs-toggle="dropdown" aria-expanded="false">
+                                      <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="{{ url_for('edit_user', user_id=user._id) }}">Edit</a>
+                                      </li>
+                                      <li><a class="dropdown-item"
+                                          href="#">Delete</a></li>
+                                    </ul>
+                                  </div>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
