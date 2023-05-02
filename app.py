@@ -178,6 +178,7 @@ def get_users():
 
 @app.route("/edit_user/<user_id>", methods=["GET", "POST"])
 @login_required
+@superuser_required
 def edit_user(user_id):
     if request.method == "POST":
         is_superuser = "on" if request.form.get("is_superuser") else "off"
