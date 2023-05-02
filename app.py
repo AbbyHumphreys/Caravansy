@@ -144,9 +144,11 @@ def login_required(f):
 def superuser_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        users = list(mongo.db.users.find({"is_superuser": "on"}))
-        print(users)
-        
+        is_superuser = mongo.db.users.find_one(
+        {"username": session["user"]})["is_superuser"]
+        if is_superuser == "off":
+            flash("You must be a superuser to view this page")
+            return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
 
@@ -168,6 +170,7 @@ def profile(username):
 
 @app.route("/get_users")
 @login_required
+@superuser_required
 def get_users():
     users = list(mongo.db.users.find())
     return render_template("users.html", users=users) 
