@@ -3,6 +3,7 @@ import os
 from flask import (
     Flask, flash, render_template, 
     redirect, request, session, url_for)
+from functools import wraps
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -130,7 +131,28 @@ def logout():
     return redirect(url_for("login"))
 
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user" not in session:
+            flash("Please login to view this page")
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+def superuser_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        users = list(mongo.db.users.find({"is_superuser": "on"}))
+        print(users)
+        
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @app.route("/profile/<username>", methods=["GET", "POST"])
+@login_required
 def profile(username):
     """
     find current user's username from the db
@@ -144,12 +166,16 @@ def profile(username):
     return render_template("profile.html", username=username)
 
 
-@app.route("/edit_users/<user_id>", methods=["GET", "POST"])
-def edit_users(user_id):
-    """
-    
+@app.route("/get_users")
+@login_required
+def get_users():
+    users = list(mongo.db.users.find())
+    return render_template("users.html", users=users) 
 
-    """
+
+@app.route("/edit_user/<user_id>", methods=["GET", "POST"])
+@login_required
+def edit_user(user_id):
     if request.method == "POST":
         is_superuser = "on" if request.form.get("is_superuser") else "off"
         apply = {
@@ -157,10 +183,9 @@ def edit_users(user_id):
         }
         mongo.db.users.update_one({"_id": ObjectId(user_id)}, {"$set": apply})
         flash("User Update Applied")
-        users = list(mongo.db.users.find())  # Fetch the updated user list
-        return redirect("edit_users.html", users=users)
-    users = list(mongo.db.users.find())
-    return render_template("edit_users.html", users=users)
+        return redirect(url_for("get_users"))
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    return render_template("edit_user.html", user=user)
 
 
 @app.route("/get_listings")
@@ -186,6 +211,7 @@ def display_listing(listing_id):
 
 
 @app.route("/add_listing", methods=["GET", "POST"])
+@login_required
 def add_listing():
     """
     render add listing page
@@ -222,6 +248,7 @@ def add_listing():
 
 
 @app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
+@login_required
 def edit_listing(listing_id):
     """
     render edit listing page with current listing info
@@ -256,6 +283,7 @@ def edit_listing(listing_id):
 
 
 @app.route("/delete_listing/<listing_id>")
+@login_required
 def delete_listing(listing_id):
     """
     delete requested listing
@@ -268,6 +296,7 @@ def delete_listing(listing_id):
 
 
 @app.route("/get_features")
+@superuser_required
 def get_features():
     """
     find all the features in the db
