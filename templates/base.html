@@ -46,7 +46,7 @@
                 </a>
               </li>
               <li class="nav-item ms-lg-5 me-5">
-                <a class="nav-link" href="{{ url_for('edit_users', user_id=session['user']) }}">Users
+                <a class="nav-link" href="{{ url_for('get_users', user_id=session['user']) }}">Users
                 </a>
               </li>
             {% endif %}
