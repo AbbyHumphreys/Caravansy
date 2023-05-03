@@ -247,8 +247,12 @@ def add_listing():
         flash("Listing Added")
         return redirect(url_for("get_listings"))
     features = mongo.db.features.find().sort("feature_name", 1)
-    print(features)
-    return render_template("add_listing.html", features=features)
+    makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
+    models = mongo.db.caravan_models.find().sort("caravan_model", 1)
+    locations = mongo.db.locations.find().sort("location", 1)
+    return render_template(
+        "add_listing.html", features=features, makes=makes, models=models, 
+        locations=locations)
 
 
 @app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
