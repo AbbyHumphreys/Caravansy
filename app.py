@@ -49,6 +49,14 @@ def home():
     return render_template("home.html")
 
 
+@app.route("/buy")
+def buy():
+    """
+    renders buy page
+    """
+    return render_template("buy.html")
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
