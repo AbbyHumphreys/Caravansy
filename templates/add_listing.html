@@ -14,11 +14,21 @@
                 <form method="POST" enctype="multipart/form-data" class="mb-5">
                     <div class="mb-3">
                         <label for="make" class="form-label">Make:</label>
-                        <input type="text" class="form-control" id="make" name="make" aria-describedby="caravanmake" required>
+                        <select class="form-select" id="make" name="make" aria-label="Choose Caravan Make" required>
+                            <option disabled selected>Choose Make:</option>
+                            {% for make in makes %}
+                                <option value="{{ make.caravan_make }}">{{ make.caravan_make|capitalize }}</option>
+                            {% endfor %}
+                          </select>
                     </div>
                     <div class="mb-3">
                         <label for="model" class="form-label">Model:</label>
-                        <input type="text" class="form-control" id="model" name="model" required>
+                        <select class="form-select" id="model" name="model" aria-label="Choose Caravan Model" required>
+                            <option disabled selected>Choose Model:</option>
+                            {% for model in models %}
+                                <option value="{{ model.caravan_model }}">{{ model.caravan_model|capitalize }}</option>
+                            {% endfor %}
+                          </select>
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price (£):</label>
@@ -42,7 +52,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Location:</label>
-                        <input type="text" class="form-control" id="location" name="location" minlength="1" maxlength="50" required>
+                        <select class="form-select" id="make" name="make" aria-label="Choose Location" required>
+                            <option disabled selected>Where is the caravan located:</option>
+                            {% for location in locations %}
+                                <option value="{{ location.location }}">{{ location.location|capitalize }}</option>
+                            {% endfor %}
+                          </select>
                     </div>
                     {% for feature in features %}
                         <div class="form-check form-check-inline">
