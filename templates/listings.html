@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="card-title">{{ listing.make}} {{ listing.model }}</h5>
+                                    <h5 class="card-title">{{ listing.make|capitalize}} {{ listing.model|capitalize }}</h5>
                                 </div>
                                 <div class="col-6 text-end">
                                     <h5 class="card-title">£{{ listing.price }}</h5>
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col-4">
                                     <i class="fa-solid fa-location-dot me-3"></i>
-                                    {{ listing.location }}
+                                    {{ listing.location|capitalize }}
                                 </div>
                             </div>
                             <div class="row">
