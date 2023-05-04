@@ -89,3 +89,24 @@ body {
 .no-text-decoration {
     text-decoration: none;
 }
+
+.sidebar {
+    height: 100vh;
+    top: 90px;
+    z-index: -2;
+    background-color: #2bfc82;
+}
+
+.sidebar-item {
+    list-style-type: none;
+}
+
+.sidebar-item, .sidebar-icon {
+    font-size: 1.2em;
+}
+
+.sidebar-anchor {
+    text-decoration: none;
+    color: #000;
+}
+
