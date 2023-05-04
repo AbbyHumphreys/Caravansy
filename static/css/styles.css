@@ -85,3 +85,7 @@ body {
 .negative-margin {
     margin-top: -3rem !important;
   }
+
+.no-text-decoration {
+    text-decoration: none;
+}
