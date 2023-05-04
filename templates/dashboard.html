@@ -22,7 +22,7 @@
                         </li>
                         {% if session.user|lower == "admin"|lower %}
                         <li class="sidebar-item mb-4">
-                            <a href="#" class="sidebar-anchor">
+                            <a href="{{ url_for('get_users', username=session['user'], user_id=session['user']) }}" class="sidebar-anchor">
                                 <i class="fa-solid fa-users me-2 sidebar-icon"></i>
                                 Users
                             </a>
