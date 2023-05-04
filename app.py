@@ -200,6 +200,21 @@ def edit_user(user_id):
     return render_template("edit_user.html", user=user)
 
 
+@app.route("/dashboard/<username>", methods=["GET", "POST"])
+def dashboard(username):
+    """
+    find current user's username from the db
+    render dashboard page
+    pass through username for welcome message
+
+    """
+    # find current user's username from the db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    listings = mongo.db.listings.find()
+    return render_template("dashboard.html", username=username, listings=listings)
+
+
 @app.route("/get_listings")
 def get_listings():
     """
