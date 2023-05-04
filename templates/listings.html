@@ -2,47 +2,56 @@
 {% block content %}
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-lg-5">
+            <div class="col text-center">
+                <h3>Find Your Perfect Static Caravan</h3>
+                <p class="mb-0">Browse our selection of privately owned caravans</p>
+                <p class="mb-0">See one you like, click through to see more information</p>
+                <p>Contact the owner either by email or phone</p>
+            </div>
+        </div>
+        <div class="row ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5">
             {% for listing in listings %}
-                <div class="col-lg-3 mb-3">
-                    <div class="card h-100">
-                        <img src="{{ listing.image }}" class="card-img-top image-card"
-                            alt="static caravan">
+                <div class="col-lg-4 mb-3 ">
+                    <div class="card h-100 d-flex align-items-stretch">
                         <div class="card-body">
-                            <div class="row">
+                            <img src="{{ listing.image }}" class="card-img-top image-card"
+                            alt="static caravan">
+                            <div class="row mt-2">
                                 <div class="col-6">
                                     <h5 class="card-title">{{ listing.make|capitalize}} {{ listing.model|capitalize }}</h5>
                                 </div>
                                 <div class="col-6 text-end">
                                     <h5 class="card-title">£{{ listing.price }}</h5>
                                 </div>
+                                <p class="paragraph-card">Size: {{ listing.length }}ft x {{ listing.width }}ft</p>
                             </div>
-                            
-                            <p class="paragraph-card">Size: {{ listing.length }}ft x {{ listing.width }}ft</p>
                             <div class="row mb-3">
                                 <div class="col-4">
                                     <i class="fa-solid fa-bed me-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Bedrooms"></i>
                                     {{ listing.beds }}
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4 text-center">
                                     <i class="fa-solid fa-users me-3"></i> 
                                     {{ listing.sleeps }}
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4 text-end">
                                     <i class="fa-solid fa-location-dot me-3"></i>
                                     {{ listing.location|capitalize }}
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-footer">
                             <div class="row">
                                 <div class="col-6">
                                     <a href="{{ url_for('display_listing', listing_id=listing._id) }}" class="btn btn-primary card-link">See More</a>
                                 </div>
                                 <div class="col-6 text-end">
                                     {% if session.user|lower == listing.created_by|lower %}
-                                        <a href="{{ url_for('edit_listing', listing_id=listing._id) }}" class="card-link">
+                                        <a href="{{ url_for('edit_listing', listing_id=listing._id) }}" class="card-link no-text-decoration">
                                             <i class="fa-regular fa-pen-to-square txt-color-1"></i>
                                         </a>
-                                        <a href="{{ url_for('delete_listing', listing_id=listing._id) }}" class="card-link">
+                                        <a href="{{ url_for('delete_listing', listing_id=listing._id) }}" class="card-link no-text-decoration">
                                             <i class="fa-solid fa-trash-can txt-color-1"></i>
                                         </a>
                                     {% endif %}
