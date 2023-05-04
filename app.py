@@ -176,12 +176,14 @@ def profile(username):
     return render_template("profile.html", username=username)
 
 
-@app.route("/get_users")
+@app.route("/get_users/<username>", methods=["GET", "POST"])
 @login_required
 @superuser_required
-def get_users():
+def get_users(username):
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
     users = list(mongo.db.users.find())
-    return render_template("users.html", users=users) 
+    return render_template("users.html", username=username, users=users) 
 
 
 @app.route("/edit_user/<user_id>", methods=["GET", "POST"])
