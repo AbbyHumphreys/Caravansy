@@ -2,11 +2,11 @@
 {% block content %}
 
 <section id="buy-section">
-    <div class="row d-flex pb-5 pt-5 bg-color-4 vh-100">
+    <div class="row d-flex pb-5 pt-5 bg-color-4">
         <div class="col-12 d-flex flex-column ms-5">
-            <h1 class="text-capitalize pt-5 buy-hero">Sell your <span class="underline">static caravan</span> your way</h1>
-            <p class="pb-5 mt-3">At Caravansy, we look for new, innovative ways to sell your caravan. Let's us do the work for you, matching buyers with sellers in unique, convienient ways.</p>
-            <a class="btn btn-primary rounded-0 mt-3 align-self-start" href="#" role="button">List Caravan</a>
+            <h1 class="text-capitalize pt-5 buy-hero">Sell your static caravan <span class="underline">your way</span></h1>
+            <p class="pb-3 mt-3">At Caravansy, we look for new, innovative ways to sell your caravan. Let's us do the work for you, matching buyers with sellers in unique, convienient ways.</p>
+            <a class="btn btn-primary rounded-0 mt-5 mb-5 align-self-start" href="{{ url_for('register') }}" role="button">List Caravan</a>
         </div>
     </div>
     <div class="row d-flex mb-5 negative-margin">
@@ -15,16 +15,20 @@
         </div>
     </div>
 </section>
-<section id="seperator">
-    <div class="row bg-color-2 txt-color-2 pt-5 pb-5">
-        <div class="col-4">
-            <h2>Transparent</h2>
+<section id="how-it-works-section">
+    <div class="row mt-5 pt-5 ps-5 pe-5 ms-5 me-5">
+        <div class="col-12 col-lg-6 ps-5">
+            <h3 class="mb-4 pb-4">How it works:</h3>
+            <ul class="mb-4 pb-4">
+                <li class="ms-4 mb-3">Register with us to gain access to features</li>
+                <li class="ms-4 mb-3">Add your caravan information onto a listing</li>
+                <li class="ms-4 mb-3">Put your listing in front of 1000s of viewers</li>
+                <li class="ms-4 mb-3">Buyers will contact you directly</li>
+            </ul>
+            <a class="btn btn-primary rounded-0 mb-2 align-self-start" href="{{ url_for('register') }}" role="button">Register Now</a>
         </div>
-        <div class="col-4">
-            <h2>Empowering</h2>
-        </div>
-        <div class="col-4">
-            <h2>Digital</h2>
+        <div class="col-12 col-lg-6 pe-5">
+            <img src="{{ url_for('static', filename='images/caravan-park-one.webp') }}" class="img-fluid" alt="couple in a caravan">
         </div>
     </div>
 </section>
