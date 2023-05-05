@@ -172,7 +172,7 @@ def profile(username):
     """
     # find current user's username from the db
     username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+        {"username": session["user"]})
     return render_template("profile.html", username=username)
 
 
