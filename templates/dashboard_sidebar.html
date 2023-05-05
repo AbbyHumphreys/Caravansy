@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-3">
+                    <div class="sidebar">
+                        <h4 class="ms-5 mb-4 pt-5">{{ username.username|capitalize }}'s Dashboard</h4>
+                        <ul class="sidebar-list ms-3">
+                            <li class="sidebar-item mb-4">
+                                <a href="{{ url_for('profile', username=session['user']) }}" class="sidebar-anchor">
+                                    <i class="fa-regular fa-id-card me-2 sidebar-icon"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="sidebar-item mb-4">
+                                <a href="{{ url_for('dashboard', username=session['user']) }}" class="sidebar-anchor">
+                                    <i class="fa-solid fa-list-ul me-2 sidebar-icon"></i>
+                                    Listings
+                                </a>
+                            </li>
+                            {% if session.user|lower == "admin"|lower %}
+                            <li class="sidebar-item mb-4">
+                                <a href="{{ url_for('get_users', username=session['user'], user_id=session['user']) }}"
+                                    class="sidebar-anchor">
+                                    <i class="fa-solid fa-users me-2 sidebar-icon"></i>
+                                    Users
+                                </a>
+                            </li>
+                            <li class="sidebar-item mb-4">
+                                <a href="#" class="sidebar-anchor">
+                                    <i class="fa-solid fa-circle-info me-2 sidebar-icon"></i>
+                                    Caravan Details
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                {% block dashboard_section %}
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+    {% endblock %}
