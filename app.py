@@ -411,6 +411,56 @@ def delete_feature(feature_id):
     return redirect(url_for("caravan_details"))
 
 
+@app.route("/add_make", methods=["GET", "POST"])
+def add_make():
+    """
+    render add caravan make page
+    add new caravan make to db
+    redirect to caravan details page
+
+    """
+    if request.method == "POST":
+        make = {
+            "caravan_make": request.form.get("caravan_make")
+        }
+        mongo.db.caravan_makes.insert_one(make)
+        flash("New Caravan Make Added")
+        return redirect(url_for("caravan_details", username=session['user']))
+    return render_template("add_caravan_make.html")
+
+
+@app.route("/edit_make/<make_id>", methods=["GET", "POST"])
+def edit_make(make_id):
+    """
+    render edit caravan make page with current make info
+    replace document info as required
+    redirect to caravan details page
+
+    """
+    if request.method == "POST":
+        submit = {
+            "caravan_make": request.form.get("caravan_make")
+        }
+        mongo.db.caravan_makes.update_one(
+            {"_id": ObjectId(make_id)}, {"$set": submit})
+        flash("Caravan Make Updated")
+        return redirect(url_for("caravan_details", username=session['user']))
+    make = mongo.db.caravan_makes.find_one({"_id": ObjectId(make_id)})
+    return render_template("edit_caravan_make.html", make=make)
+
+
+@app.route("/delete_make/<make_id>")
+def delete_make(make_id):
+    """
+    delete requested caravan make
+    redirect to caravan details page
+
+    """
+    mongo.db.caravan_makes.delete_one({"_id": ObjectId(make_id)})
+    flash("Caravan Make Deleted")
+    return redirect(url_for("caravan_details", username=session['user']))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
             port=int(os.environ.get("PORT")),
