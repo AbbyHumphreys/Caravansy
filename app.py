@@ -217,6 +217,26 @@ def dashboard(username):
     return render_template("dashboard.html", username=username, listings=listings)
 
 
+@app.route("/caravan_details/<username>", methods=["GET", "POST"])
+def caravan_details(username):
+    """
+    find current user's username from the db
+    render profile page
+    pass through username for welcome message
+
+    """
+    # find current user's username from the db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})
+    makes = mongo.db.caravan_makes.find()
+    models = mongo.db.caravan_models.find()
+    features = mongo.db.features.find()
+    locations = mongo.db.locations.find()
+    return render_template(
+        "caravan_details.html", username=username, makes=makes, 
+        models=models, features=features, locations=locations)
+
+
 @app.route("/get_listings")
 def get_listings():
     """
