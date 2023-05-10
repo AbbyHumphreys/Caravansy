@@ -197,9 +197,21 @@ def edit_user(user_id):
         }
         mongo.db.users.update_one({"_id": ObjectId(user_id)}, {"$set": apply})
         flash("User Update Applied")
-        return redirect(url_for("get_users"))
+        return redirect(url_for("get_users", username=session['user'], user_id=session['user']))
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     return render_template("edit_user.html", user=user)
+
+
+@app.route("/delete_user/<user_id>")
+def delete_user(user_id):
+    """
+    delete requested user
+    redirect to get_users view
+
+    """
+    mongo.db.users.delete_one({"_id": ObjectId(user_id)})
+    flash("User Deleted")
+    return redirect(url_for("get_users", username=session['user'], user_id=session['user']))
 
 
 @app.route("/dashboard/<username>", methods=["GET", "POST"])
