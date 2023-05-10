@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="mb-5">Add Caravan Make</h1>
+                    <form method="POST" class="mb-5">
+                        <div class="mb-3">
+                            <label for="caravan_make" class="form-label">New Caravan Make:</label>
+                            <input type="text" class="form-control" id="caravan_make" name="caravan_make" aria-describedby="new-caravan-make" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
