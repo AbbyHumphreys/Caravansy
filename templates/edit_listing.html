@@ -54,7 +54,7 @@
                         <label for="image" class="form-label">Upload Image:</label>
                         <input type="file" class="form-control" value="{{ listing.image }}" id="image" name="image" accept="image/*" required>
                     </div>
-                    <a href="{{ url_for('get_listings') }}" class="btn btn-danger">Cancel</a>
+                    <button type="submit" class="btn btn-primary" onclick="history.back()">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
