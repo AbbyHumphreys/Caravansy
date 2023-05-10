@@ -348,18 +348,6 @@ def delete_listing(listing_id):
     return redirect(url_for("get_listings"))
 
 
-@app.route("/get_features")
-@superuser_required
-def get_features():
-    """
-    find all the features in the db
-    render features page
-
-    """
-    features = mongo.db.features.find()
-    return render_template("features.html", features=features)
-
-
 @app.route("/add_feature", methods=["GET", "POST"])
 def add_feature():
     """
@@ -374,7 +362,7 @@ def add_feature():
         }
         mongo.db.features.insert_one(feature)
         flash("New Feature Added")
-        return redirect(url_for("get_features"))
+        return redirect(url_for("caravan_details"))
     return render_template("add_feature.html")
 
 
@@ -393,7 +381,7 @@ def edit_feature(feature_id):
         mongo.db.features.update_one(
             {"_id": ObjectId(feature_id)}, {"$set": submit})
         flash("Feature Updated")
-        return redirect(url_for("get_features"))
+        return redirect(url_for("caravan_details"))
     feature = mongo.db.features.find_one({"_id": ObjectId(feature_id)})
     return render_template("edit_feature.html", feature=feature)
 
@@ -407,7 +395,7 @@ def delete_feature(feature_id):
     """
     mongo.db.features.delete_one({"_id": ObjectId(feature_id)})
     flash("Feature Deleted")
-    return redirect(url_for("get_features"))
+    return redirect(url_for("caravan_details"))
 
 
 if __name__ == "__main__":
