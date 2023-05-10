@@ -461,6 +461,56 @@ def delete_make(make_id):
     return redirect(url_for("caravan_details", username=session['user']))
 
 
+@app.route("/add_model", methods=["GET", "POST"])
+def add_model():
+    """
+    render add caravan model page
+    add new caravan model to db
+    redirect to caravan details page
+
+    """
+    if request.method == "POST":
+        model = {
+            "caravan_model": request.form.get("caravan_model")
+        }
+        mongo.db.caravan_models.insert_one(model)
+        flash("New Caravan Model Added")
+        return redirect(url_for("caravan_details", username=session['user']))
+    return render_template("add_caravan_model.html")
+
+
+@app.route("/edit_model/<model_id>", methods=["GET", "POST"])
+def edit_model(model_id):
+    """
+    render edit caravan model page with current model info
+    replace document info as required
+    redirect to caravan details page
+
+    """
+    if request.method == "POST":
+        submit = {
+            "caravan_model": request.form.get("caravan_model")
+        }
+        mongo.db.caravan_models.update_one(
+            {"_id": ObjectId(model_id)}, {"$set": submit})
+        flash("Caravan Model Updated")
+        return redirect(url_for("caravan_details", username=session['user']))
+    model = mongo.db.caravan_models.find_one({"_id": ObjectId(model_id)})
+    return render_template("edit_caravan_model.html", model=model)
+
+
+@app.route("/delete_model/<model_id>")
+def delete_model(model_id):
+    """
+    delete requested caravan model
+    redirect to caravan details page
+
+    """
+    mongo.db.caravan_models.delete_one({"_id": ObjectId(model_id)})
+    flash("Caravan Model Deleted")
+    return redirect(url_for("caravan_details", username=session['user']))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), 
             port=int(os.environ.get("PORT")),
