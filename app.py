@@ -181,7 +181,7 @@ def profile(username):
 @superuser_required
 def get_users(username):
     username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+        {"username": session["user"]})
     users = list(mongo.db.users.find())
     return render_template("users.html", username=username, users=users) 
 
@@ -224,9 +224,10 @@ def dashboard(username):
     """
     # find current user's username from the db
     username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+        {"username": session["user"]})
     listings = mongo.db.listings.find()
-    return render_template("dashboard.html", username=username, listings=listings)
+    return render_template(
+        "dashboard.html", username=username, listings=listings)
 
 
 @app.route("/caravan_details/<username>", methods=["GET", "POST"])
