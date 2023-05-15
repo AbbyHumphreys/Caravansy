@@ -242,7 +242,7 @@ def caravan_details(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})
     makes = mongo.db.caravan_makes.find()
-    models = mongo.db.caravan_models.find()
+    models = mongo.db.caravan_models.find().sort("caravan_model", 1)
     features = mongo.db.features.find()
     locations = mongo.db.locations.find()
     return render_template(
@@ -470,8 +470,16 @@ def add_model():
 
     """
     if request.method == "POST":
+        # check if caravan  model already exists in db
+        existing_model = mongo.db.caravan_models.find_one(
+            {"caravan_model": request.form.get("caravan_model")})
+
+        if existing_model:
+            flash("Model already exists")
+            return redirect(url_for("caravan_details", username=session['user']))
+            
         model = {
-            "caravan_model": request.form.get("caravan_model")
+            "caravan_model": request.form.get("caravan_model").lower()
         }
         mongo.db.caravan_models.insert_one(model)
         flash("New Caravan Model Added")
