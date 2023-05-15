@@ -377,7 +377,7 @@ def add_feature():
         if existing_feature:
             flash("Feature already exists")
             return redirect(url_for("caravan_details", username=session['user']))
-            
+
         feature = {
             "feature_name": request.form.get("feature_name").lower()
         }
@@ -548,6 +548,72 @@ def delete_model(model_id):
     """
     mongo.db.caravan_models.delete_one({"_id": ObjectId(model_id)})
     flash("Caravan Model Deleted")
+    return redirect(url_for("caravan_details", username=session['user']))
+
+
+@app.route("/add_location", methods=["GET", "POST"])
+def add_location():
+    """
+    render add location page
+    add new location to db
+    redirect to caravan details page
+
+    """
+    if request.method == "POST":
+        # check if location already exists in db
+        existing_location = mongo.db.locations.find_one(
+            {"location": request.form.get("location")})
+
+        if existing_location:
+            flash("Location already exists")
+            return redirect(url_for("caravan_details", username=session['user']))
+            
+        location = {
+            "location": request.form.get("location").lower()
+        }
+        mongo.db.locations.insert_one(location)
+        flash("New Location Added")
+        return redirect(url_for("caravan_details", username=session['user']))
+    return render_template("add_location.html")
+
+
+@app.route("/edit_location/<location_id>", methods=["GET", "POST"])
+def edit_location(location_id):
+    """
+    render edit location page with current location info
+    replace document info as required
+    redirect to caravan details page
+
+    """
+    if request.method == "POST":
+        # check if location already exists in db
+        existing_location = mongo.db.locations.find_one(
+            {"location": request.form.get("location")})
+
+        if existing_location:
+            flash("Location already exists")
+            return redirect(url_for("caravan_details", username=session['user']))
+
+        submit = {
+            "location": request.form.get("location").lower()
+        }
+        mongo.db.locations.update_one(
+            {"_id": ObjectId(location_id)}, {"$set": submit})
+        flash("Location Updated")
+        return redirect(url_for("caravan_details", username=session['user']))
+    location = mongo.db.locations.find_one({"_id": ObjectId(location_id)})
+    return render_template("edit_location.html", location=location)
+
+
+@app.route("/delete_location/<location_id>")
+def delete_location(location_id):
+    """
+    delete requested location
+    redirect to caravan details page
+
+    """
+    mongo.db.locations.delete_one({"_id": ObjectId(location_id)})
+    flash("Location Deleted")
     return redirect(url_for("caravan_details", username=session['user']))
 
 
