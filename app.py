@@ -370,12 +370,20 @@ def add_feature():
 
     """
     if request.method == "POST":
+        # check if caravan  feature already exists in db
+        existing_feature = mongo.db.features.find_one(
+            {"feature_name": request.form.get("feature_name")})
+
+        if existing_feature:
+            flash("Feature already exists")
+            return redirect(url_for("caravan_details", username=session['user']))
+            
         feature = {
-            "feature_name": request.form.get("feature_name")
+            "feature_name": request.form.get("feature_name").lower()
         }
         mongo.db.features.insert_one(feature)
         flash("New Feature Added")
-        return redirect(url_for("caravan_details"))
+        return redirect(url_for("caravan_details", username=session['user']))
     return render_template("add_feature.html")
 
 
@@ -389,12 +397,12 @@ def edit_feature(feature_id):
     """
     if request.method == "POST":
         submit = {
-            "feature_name": request.form.get("feature_name")
+            "feature_name": request.form.get("feature_name").lower()
         }
         mongo.db.features.update_one(
             {"_id": ObjectId(feature_id)}, {"$set": submit})
         flash("Feature Updated")
-        return redirect(url_for("caravan_details"))
+        return redirect(url_for("caravan_details", username=session['user']))
     feature = mongo.db.features.find_one({"_id": ObjectId(feature_id)})
     return render_template("edit_feature.html", feature=feature)
 
@@ -408,7 +416,7 @@ def delete_feature(feature_id):
     """
     mongo.db.features.delete_one({"_id": ObjectId(feature_id)})
     flash("Feature Deleted")
-    return redirect(url_for("caravan_details"))
+    return redirect(url_for("caravan_details", username=session['user']))
 
 
 @app.route("/add_make", methods=["GET", "POST"])
@@ -420,8 +428,16 @@ def add_make():
 
     """
     if request.method == "POST":
+        # check if caravan  make already exists in db
+        existing_make = mongo.db.caravan_makes.find_one(
+            {"caravan_make": request.form.get("caravan_make")})
+
+        if existing_make:
+            flash("Make already exists")
+            return redirect(url_for("caravan_details", username=session['user']))
+
         make = {
-            "caravan_make": request.form.get("caravan_make")
+            "caravan_make": request.form.get("caravan_make").lower()
         }
         mongo.db.caravan_makes.insert_one(make)
         flash("New Caravan Make Added")
@@ -438,8 +454,16 @@ def edit_make(make_id):
 
     """
     if request.method == "POST":
+        # check if caravan  make already exists in db
+        existing_make = mongo.db.caravan_makes.find_one(
+            {"caravan_make": request.form.get("caravan_make")})
+
+        if existing_make:
+            flash("Make already exists")
+            return redirect(url_for("caravan_details", username=session['user']))
+
         submit = {
-            "caravan_make": request.form.get("caravan_make")
+            "caravan_make": request.form.get("caravan_make").lower()
         }
         mongo.db.caravan_makes.update_one(
             {"_id": ObjectId(make_id)}, {"$set": submit})
@@ -496,8 +520,16 @@ def edit_model(model_id):
 
     """
     if request.method == "POST":
+        # check if caravan  model already exists in db
+        existing_model = mongo.db.caravan_models.find_one(
+            {"caravan_model": request.form.get("caravan_model")})
+
+        if existing_model:
+            flash("Model already exists")
+            return redirect(url_for("caravan_details", username=session['user']))
+
         submit = {
-            "caravan_model": request.form.get("caravan_model")
+            "caravan_model": request.form.get("caravan_model").lower()
         }
         mongo.db.caravan_models.update_one(
             {"_id": ObjectId(model_id)}, {"$set": submit})
