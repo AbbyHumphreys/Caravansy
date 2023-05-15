@@ -127,10 +127,17 @@
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Locations
-                    </button>
+                    <div class="row">
+                        <div class="col-10">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Locations
+                            </button>
+                        </div>
+                        <div class="col-2">
+                            <a class="btn btn-primary rounded-0 align-items-end" href="{{ url_for('add_location') }}" role="button">Add Location</a>
+                        </div>
+                    </div>
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#caravan_details">
                     <div class="accordion-body">
@@ -144,9 +151,9 @@
                                             <i class="fa-solid fa-ellipsis"></i>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Edit</a>
+                                            <li><a class="dropdown-item" href="{{ url_for('edit_location', location_id=location._id) }}">Edit</a>
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            <li><a class="dropdown-item" href="{{ url_for('delete_location', location_id=location._id) }}">Delete</a></li>
                                         </ul>
                                     </div>
                                 </li>
