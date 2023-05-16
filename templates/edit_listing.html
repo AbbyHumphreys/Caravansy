@@ -78,8 +78,20 @@
                         </textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Upload Image:</label>
-                        <input type="file" class="form-control" value="{{ listing.image }}" id="image" name="image" accept="image/*" required>
+                        <div class="row" id="original-image">
+                            <div class="col-3">
+                                Image:
+                                <img src="{{ listing.image }}" class="img-thumbnail"
+                                    alt="static caravan">
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-primary" id="replace-button">Replace?</button>
+                            </div>
+                        </div>
+                        <div id="file-uploader" class="hide">
+                            <label for="image" class="form-label">Upload Image:</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*" required> 
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="history.back()">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
