@@ -213,6 +213,7 @@ def edit_user(user_id):
     return render_template("edit_user.html", user=user)
 
 
+# DELETE USER VIEW
 @app.route("/delete_user/<user_id>")
 def delete_user(user_id):
     """
@@ -225,6 +226,7 @@ def delete_user(user_id):
     return redirect(url_for("get_users", username=session['user'], user_id=session['user']))
 
 
+# DASHBOARD / USER'S LISTINGS VIEW
 @app.route("/dashboard/<username>", methods=["GET", "POST"])
 def dashboard(username):
     """
@@ -241,6 +243,7 @@ def dashboard(username):
         "dashboard.html", username=username, listings=listings)
 
 
+# CARAVAN DETAILS VIEW
 @app.route("/caravan_details/<username>", methods=["GET", "POST"])
 def caravan_details(username):
     """
@@ -261,6 +264,7 @@ def caravan_details(username):
         models=models, features=features, locations=locations)
 
 
+# DISPLAY ALL LISTINGS VIEW
 @app.route("/get_listings")
 def get_listings():
     """
@@ -272,6 +276,7 @@ def get_listings():
     return render_template("listings.html", listings=listings)
 
 
+# DISPLAY ONE LISTNG VIEW
 @app.route("/display_listing/<listing_id>")
 def display_listing(listing_id):
     """
@@ -283,6 +288,7 @@ def display_listing(listing_id):
     return render_template("listing.html", listing=listing)
 
 
+# ADD LISTING VIEW
 @app.route("/add_listing", methods=["GET", "POST"])
 @login_required
 def add_listing():
@@ -324,6 +330,7 @@ def add_listing():
         locations=locations)
 
 
+# EDIT LISTING VIEW
 @app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
 @login_required
 def edit_listing(listing_id):
@@ -359,6 +366,7 @@ def edit_listing(listing_id):
     return render_template("edit_listing.html", listing=listing)
 
 
+# DELETE LISTING VIEW
 @app.route("/delete_listing/<listing_id>")
 @login_required
 def delete_listing(listing_id):
@@ -372,6 +380,7 @@ def delete_listing(listing_id):
     return redirect(url_for("get_listings"))
 
 
+# ADD FEATURE VIEW
 @app.route("/add_feature", methods=["GET", "POST"])
 def add_feature():
     """
@@ -398,6 +407,7 @@ def add_feature():
     return render_template("add_feature.html")
 
 
+# EDIT FEATURE VIEW
 @app.route("/edit_feature/<feature_id>", methods=["GET", "POST"])
 def edit_feature(feature_id):
     """
@@ -418,6 +428,7 @@ def edit_feature(feature_id):
     return render_template("edit_feature.html", feature=feature)
 
 
+# DELETE FEATURE VIEW
 @app.route("/delete_feature/<feature_id>")
 def delete_feature(feature_id):
     """
@@ -429,7 +440,7 @@ def delete_feature(feature_id):
     flash("Feature Deleted")
     return redirect(url_for("caravan_details", username=session['user']))
 
-
+# ADD MAKE VIEW
 @app.route("/add_make", methods=["GET", "POST"])
 def add_make():
     """
@@ -456,6 +467,7 @@ def add_make():
     return render_template("add_caravan_make.html")
 
 
+# EDIT MAKE VIEW
 @app.route("/edit_make/<make_id>", methods=["GET", "POST"])
 def edit_make(make_id):
     """
@@ -484,6 +496,7 @@ def edit_make(make_id):
     return render_template("edit_caravan_make.html", make=make)
 
 
+# DELETE MAKE VIEW
 @app.route("/delete_make/<make_id>")
 def delete_make(make_id):
     """
@@ -496,6 +509,7 @@ def delete_make(make_id):
     return redirect(url_for("caravan_details", username=session['user']))
 
 
+# ADD MODEL VIEW
 @app.route("/add_model", methods=["GET", "POST"])
 def add_model():
     """
@@ -522,6 +536,7 @@ def add_model():
     return render_template("add_caravan_model.html")
 
 
+# EDIT MODEL VIEW
 @app.route("/edit_model/<model_id>", methods=["GET", "POST"])
 def edit_model(model_id):
     """
@@ -550,6 +565,7 @@ def edit_model(model_id):
     return render_template("edit_caravan_model.html", model=model)
 
 
+# DELETE MODEL VIEW
 @app.route("/delete_model/<model_id>")
 def delete_model(model_id):
     """
@@ -562,6 +578,7 @@ def delete_model(model_id):
     return redirect(url_for("caravan_details", username=session['user']))
 
 
+# ADD LOCATION VIEW
 @app.route("/add_location", methods=["GET", "POST"])
 def add_location():
     """
@@ -588,6 +605,7 @@ def add_location():
     return render_template("add_location.html")
 
 
+# EDIT LOCATION VIEW
 @app.route("/edit_location/<location_id>", methods=["GET", "POST"])
 def edit_location(location_id):
     """
@@ -617,6 +635,7 @@ def edit_location(location_id):
     return render_template("edit_location.html", location=location)
 
 
+# DELETE LOCATION VIEW
 @app.route("/delete_location/<location_id>")
 def delete_location(location_id):
     """
