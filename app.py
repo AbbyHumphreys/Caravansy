@@ -40,6 +40,31 @@ mongo = PyMongo(app)
 ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "gif"]
 
 
+# WRAPPERS
+# LOGIN REQUIRED WRAPPER
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user" not in session:
+            flash("Please login to view this page")
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+# SUPERUSER REQUIRED WRAPPER
+def superuser_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        is_superuser = mongo.db.users.find_one(
+        {"username": session["user"]})["is_superuser"]
+        if is_superuser == "off":
+            flash("You must be a superuser to view this page")
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 # ROUTES
 
 # HOME VIEW
@@ -145,30 +170,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-# LOGIN REQUIRED WRAPPER
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if "user" not in session:
-            flash("Please login to view this page")
-            return redirect(url_for('login'))
-        return f(*args, **kwargs)
-    return decorated_function
-
-
-# SUPERUSER REQUIRED WRAPPER
-def superuser_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        is_superuser = mongo.db.users.find_one(
-        {"username": session["user"]})["is_superuser"]
-        if is_superuser == "off":
-            flash("You must be a superuser to view this page")
-            return redirect(url_for('login'))
-        return f(*args, **kwargs)
-    return decorated_function
-
-
 # PROFILE VIEW
 @app.route("/profile/<username>", methods=["GET", "POST"])
 @login_required
@@ -215,6 +216,8 @@ def edit_user(user_id):
 
 # DELETE USER VIEW
 @app.route("/delete_user/<user_id>")
+@login_required
+@superuser_required
 def delete_user(user_id):
     """
     delete requested user
@@ -228,6 +231,7 @@ def delete_user(user_id):
 
 # DASHBOARD / USER'S LISTINGS VIEW
 @app.route("/dashboard/<username>", methods=["GET", "POST"])
+@login_required
 def dashboard(username):
     """
     find current user's username from the db
@@ -245,6 +249,8 @@ def dashboard(username):
 
 # CARAVAN DETAILS VIEW
 @app.route("/caravan_details/<username>", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def caravan_details(username):
     """
     find current user's username from the db
@@ -362,8 +368,14 @@ def edit_listing(listing_id):
         mongo.db.listings.update_one({"_id": ObjectId(listing_id)}, {"$set": submit})
         flash("Listing Updated")
         return redirect(url_for("get_listings"))
+    features = mongo.db.features.find().sort("feature_name", 1)
+    makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
+    models = mongo.db.caravan_models.find().sort("caravan_model", 1)
+    locations = mongo.db.locations.find().sort("location", 1)
     listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
-    return render_template("edit_listing.html", listing=listing)
+    return render_template(
+        "edit_listing.html", features=features, makes=makes, 
+        models=models, locations=locations, listing=listing)
 
 
 # DELETE LISTING VIEW
@@ -382,6 +394,8 @@ def delete_listing(listing_id):
 
 # ADD FEATURE VIEW
 @app.route("/add_feature", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def add_feature():
     """
     render add feature page
@@ -409,6 +423,8 @@ def add_feature():
 
 # EDIT FEATURE VIEW
 @app.route("/edit_feature/<feature_id>", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def edit_feature(feature_id):
     """
     render edit feature page with current feature info
@@ -430,6 +446,8 @@ def edit_feature(feature_id):
 
 # DELETE FEATURE VIEW
 @app.route("/delete_feature/<feature_id>")
+@login_required
+@superuser_required
 def delete_feature(feature_id):
     """
     delete requested feature
@@ -442,6 +460,8 @@ def delete_feature(feature_id):
 
 # ADD MAKE VIEW
 @app.route("/add_make", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def add_make():
     """
     render add caravan make page
@@ -469,6 +489,8 @@ def add_make():
 
 # EDIT MAKE VIEW
 @app.route("/edit_make/<make_id>", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def edit_make(make_id):
     """
     render edit caravan make page with current make info
@@ -498,6 +520,8 @@ def edit_make(make_id):
 
 # DELETE MAKE VIEW
 @app.route("/delete_make/<make_id>")
+@login_required
+@superuser_required
 def delete_make(make_id):
     """
     delete requested caravan make
@@ -511,6 +535,8 @@ def delete_make(make_id):
 
 # ADD MODEL VIEW
 @app.route("/add_model", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def add_model():
     """
     render add caravan model page
@@ -538,6 +564,8 @@ def add_model():
 
 # EDIT MODEL VIEW
 @app.route("/edit_model/<model_id>", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def edit_model(model_id):
     """
     render edit caravan model page with current model info
@@ -567,6 +595,8 @@ def edit_model(model_id):
 
 # DELETE MODEL VIEW
 @app.route("/delete_model/<model_id>")
+@login_required
+@superuser_required
 def delete_model(model_id):
     """
     delete requested caravan model
@@ -580,6 +610,8 @@ def delete_model(model_id):
 
 # ADD LOCATION VIEW
 @app.route("/add_location", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def add_location():
     """
     render add location page
@@ -607,6 +639,8 @@ def add_location():
 
 # EDIT LOCATION VIEW
 @app.route("/edit_location/<location_id>", methods=["GET", "POST"])
+@login_required
+@superuser_required
 def edit_location(location_id):
     """
     render edit location page with current location info
@@ -637,6 +671,8 @@ def edit_location(location_id):
 
 # DELETE LOCATION VIEW
 @app.route("/delete_location/<location_id>")
+@login_required
+@superuser_required
 def delete_location(location_id):
     """
     delete requested location
