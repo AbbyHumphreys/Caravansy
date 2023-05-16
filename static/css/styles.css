@@ -110,3 +110,6 @@ body {
     color: #000;
 }
 
+.hide {
+    display: none;
+}
