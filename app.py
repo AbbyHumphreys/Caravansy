@@ -32,7 +32,7 @@ cloudinary.config(cloud_name=os.getenv("CLOUD_NAME"),
                 api_secret=os.getenv("API_SECRET"))
 
 
-# assignes pymongo app to variable mongo
+# assigns pymongo app to variable mongo
 mongo = PyMongo(app)
 
 
@@ -41,6 +41,8 @@ ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "gif"]
 
 
 # ROUTES
+
+# HOME VIEW
 @app.route("/")
 def home():
     """
@@ -49,6 +51,7 @@ def home():
     return render_template("home.html")
 
 
+# BUY VIEW
 @app.route("/buy")
 def buy():
     """
@@ -57,6 +60,7 @@ def buy():
     return render_template("buy.html")
 
 
+# REGISTER VIEW
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
@@ -89,6 +93,7 @@ def register():
     return render_template("register.html")
 
 
+# LOGIN VIEW
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
@@ -126,6 +131,7 @@ def login():
     return render_template("login.html")
 
 
+# LOGOUT VIEW
 @app.route("/logout")
 def logout():
     """
@@ -139,6 +145,7 @@ def logout():
     return redirect(url_for("login"))
 
 
+# LOGIN REQUIRED WRAPPER
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -149,6 +156,7 @@ def login_required(f):
     return decorated_function
 
 
+# SUPERUSER REQUIRED WRAPPER
 def superuser_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -161,6 +169,7 @@ def superuser_required(f):
     return decorated_function
 
 
+# PROFILE VIEW
 @app.route("/profile/<username>", methods=["GET", "POST"])
 @login_required
 def profile(username):
@@ -176,6 +185,7 @@ def profile(username):
     return render_template("profile.html", username=username)
 
 
+# DISPLAY USERS VIEW
 @app.route("/get_users/<username>", methods=["GET", "POST"])
 @login_required
 @superuser_required
@@ -186,6 +196,7 @@ def get_users(username):
     return render_template("users.html", username=username, users=users) 
 
 
+# EDIT USER VIEW
 @app.route("/edit_user/<user_id>", methods=["GET", "POST"])
 @login_required
 @superuser_required
@@ -567,7 +578,7 @@ def add_location():
         if existing_location:
             flash("Location already exists")
             return redirect(url_for("caravan_details", username=session['user']))
-            
+           
         location = {
             "location": request.form.get("location").lower()
         }
@@ -592,7 +603,8 @@ def edit_location(location_id):
 
         if existing_location:
             flash("Location already exists")
-            return redirect(url_for("caravan_details", username=session['user']))
+            return redirect(url_for(
+                "caravan_details", username=session['user']))
 
         submit = {
             "location": request.form.get("location").lower()
