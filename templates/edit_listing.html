@@ -78,19 +78,29 @@
                         </textarea>
                     </div>
                     <div class="mb-3">
-                        <div class="row" id="original-image">
+                        <div class="row">
                             <div class="col-3">
                                 Image:
                                 <img src="{{ listing.image }}" class="img-thumbnail"
                                     alt="static caravan">
+                                    
+                                        
                             </div>
-                            <div class="col-3">
-                                <button type="button" class="btn btn-primary" id="replace-button">Replace?</button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="url" name="original-image" id="original-image" value="{{ listing.image }}"
+                                        pattern="https://.*" size="30"
+                                        disabled required>
+                                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#replaceButtonCollapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            Replace?
+                                        </a>
+                                </div>
                             </div>
+                            
                         </div>
-                        <div id="file-uploader" class="hide">
+                        <div class="collapse" id="replaceButtonCollapse">
                             <label for="image" class="form-label">Upload Image:</label>
-                            <input type="file" class="form-control" id="image" name="image" accept="image/*" required> 
+                            <input type="file" class="form-control" id="image" value="{{ listing.image }}" name="image" accept="image/*"> 
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="history.back()">Cancel</button>
