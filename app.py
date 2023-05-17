@@ -348,10 +348,15 @@ def edit_listing(listing_id):
 
     """
     if request.method == "POST":
-        image_to_upload = request.files["image"]
-        if image_to_upload:
-            image_upload = cloudinary.uploader.upload(
-                image_to_upload, upload_preset="ulau1prq")
+        image = ''
+        if request.files["image"] == '':
+            image = request.form.get("original-image")
+        else:
+            image_to_upload = request.files["image"]
+            if image_to_upload:
+                image_upload = cloudinary.uploader.upload(
+                    image_to_upload, upload_preset="ulau1prq")
+                image = image_upload["secure_url"]
         submit = {
             "make": request.form.get("make"),
             "model": request.form.get("model"),
@@ -362,7 +367,7 @@ def edit_listing(listing_id):
             "sleeps": request.form.get("sleeps"),
             "location": request.form.get("location"),
             "description": request.form.get("description"),
-            "image": image_upload["secure_url"],
+            "image": image,
             "created_by": session["user"]
         }
         mongo.db.listings.update_one({"_id": ObjectId(listing_id)}, {"$set": submit})
