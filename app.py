@@ -354,6 +354,7 @@ def edit_listing(listing_id):
             "model": request.form.get("model"),
             "length": request.form.get("length"),
             "width": request.form.get("width"),
+            "year": request.form.get("year"),
             "price": request.form.get("price"),
             "beds": request.form.get("beds"),
             "sleeps": request.form.get("sleeps"),
