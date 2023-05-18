@@ -39,6 +39,10 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="year" class="form-label">Year:</label>
+                        <input type="number" class="form-control" value="{{ listing.year }}" id="year" name="year" minlength="4" maxlength="4" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="price" class="form-label">Price (£):</label>
                         <input type="number" class="form-control" value="{{ listing.price }}" id="price" name="price" minlength="1" maxlength="8" required>
                     </div>
@@ -82,9 +86,7 @@
                             <div class="col-3">
                                 Image:
                                 <img src="{{ listing.image }}" class="img-thumbnail"
-                                    alt="static caravan">
-                                    
-                                        
+                                    alt="static caravan">      
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -96,7 +98,6 @@
                                         </a>
                                 </div>
                             </div>
-                            
                         </div>
                         <div class="collapse" id="replaceButtonCollapse">
                             <label for="image" class="form-label">Upload Image:</label>
