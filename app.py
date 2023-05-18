@@ -315,6 +315,7 @@ def add_listing():
             "model": request.form.get("model"),
             "length": request.form.get("length"),
             "width": request.form.get("width"),
+            "year": request.form.get("year"),
             "price": request.form.get("price"),
             "beds": request.form.get("beds"),
             "sleeps": request.form.get("sleeps"),
@@ -360,6 +361,7 @@ def edit_listing(listing_id):
             "description": request.form.get("description"),
             "created_by": session["user"]
         }
+        # only update image field if new image inserted
         if request.files["image"] != '':
             image_to_upload = request.files["image"]
             if image_to_upload:
