@@ -20,7 +20,6 @@
                                     Listings
                                 </a>
                             </li>
-                            {% if session.user|lower == "admin"|lower %}
                             <li class="sidebar-item mb-4">
                                 <a href="{{ url_for('get_users', username=session['user'], user_id=session['user']) }}"
                                     class="sidebar-anchor">
@@ -35,7 +34,6 @@
                                     Caravan Details
                                 </a>
                             </li>
-                            {% endif %}
                         </ul>
                     </div>
                 </div>
