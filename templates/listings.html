@@ -10,6 +10,18 @@
                 <p>Contact the owner either by email or phone</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <form method="POST" action="{{ url_for('search') }}" class="mb-5">
+                    <div class="mb-3">
+                        <label for="query" class="form-label">Search:</label>
+                        <input type="text" class="form-control" id="query" name="query" minlength="3" required>
+                    </div>
+                    <a class="btn btn-primary rounded-0" href="{{ url_for('get_listings') }}" role="button">Clear</a>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
         <div class="row ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5">
             {% for listing in listings %}
                 <div class="col-lg-4 mb-3 ">
