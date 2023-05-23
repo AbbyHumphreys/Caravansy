@@ -270,6 +270,14 @@ def caravan_details(username):
         models=models, features=features, locations=locations)
 
 
+# SEARCH LISTINGS
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    listings = list(mongo.db.listings.find({"$text": {"$search": query}}))
+    return render_template("listings.html", listings=listings)
+
+
 # DISPLAY ALL LISTINGS VIEW
 @app.route("/get_listings")
 def get_listings():
