@@ -369,7 +369,7 @@ def add_listing():
         }
         mongo.db.listings.insert_one(listing)
         flash("Listing Added")
-        return redirect(url_for("get_listings"))
+        return redirect(url_for("dashboard", username=session['user']))
     features = mongo.db.features.find().sort("feature_name", 1)
     makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
     models = mongo.db.caravan_models.find().sort("caravan_model", 1)
@@ -415,7 +415,7 @@ def edit_listing(listing_id):
         mongo.db.listings.update_one(
             {"_id": ObjectId(listing_id)}, {"$set": submit})
         flash("Listing Updated")
-        return redirect(url_for("get_listings"))
+        return redirect(url_for("dashboard", username=session['user']))
     features = mongo.db.features.find().sort("feature_name", 1)
     makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
     models = mongo.db.caravan_models.find().sort("caravan_model", 1)
@@ -437,7 +437,7 @@ def delete_listing(listing_id):
     """
     mongo.db.listings.delete_one({"_id": ObjectId(listing_id)})
     flash("Listing Deleted")
-    return redirect(url_for("get_listings"))
+    return redirect(url_for("dashboard", username=session['user']))
 
 
 # ADD FEATURE VIEW
@@ -508,6 +508,7 @@ def delete_feature(feature_id):
     mongo.db.features.delete_one({"_id": ObjectId(feature_id)})
     flash("Feature Deleted")
     return redirect(url_for("caravan_details", username=session['user']))
+
 
 # ADD MAKE VIEW
 @app.route("/add_make", methods=["GET", "POST"])
