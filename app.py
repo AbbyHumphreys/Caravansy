@@ -316,7 +316,7 @@ def get_listings():
 
     """
     listings = mongo.db.listings.find()
-    return render_template("listings.html", listings=listings)
+    return render_template("listing_templates/listings.html", listings=listings)
 
 
 # DISPLAY ONE LISTNG VIEW
