@@ -85,6 +85,15 @@ def sell():
     return render_template("general_templates/sell.html")
 
 
+# ABOUT VIEW
+@app.route("/general_templates/about")
+def about():
+    """
+    renders about page
+    """
+    return render_template("general_templates/about.html")
+
+
 # REGISTER VIEW
 @app.route("/register", methods=["GET", "POST"])
 def register():
