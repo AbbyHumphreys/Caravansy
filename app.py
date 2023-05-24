@@ -332,7 +332,7 @@ def display_listing(listing_id):
 
 
 # ADD LISTING VIEW
-@app.route("/add_listing", methods=["GET", "POST"])
+@app.route("/listing_templates/add_listing", methods=["GET", "POST"])
 @login_required
 def add_listing():
     """
@@ -370,7 +370,8 @@ def add_listing():
     models = mongo.db.caravan_models.find().sort("caravan_model", 1)
     locations = mongo.db.locations.find().sort("location", 1)
     return render_template(
-        "add_listing.html", features=features, makes=makes, models=models, 
+        "listing_templates/add_listing.html",
+        features=features, makes=makes, models=models,
         locations=locations)
 
 
