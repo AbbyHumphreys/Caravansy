@@ -223,7 +223,8 @@ def get_users(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})
     users = list(mongo.db.users.find())
-    return render_template("users.html", username=username, users=users) 
+    return render_template(
+        "dashboard_templates/users.html", username=username, users=users) 
 
 
 # EDIT USER VIEW
