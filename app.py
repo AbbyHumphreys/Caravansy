@@ -306,8 +306,19 @@ def caravan_details(username):
 # SEARCH LISTINGS
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    query = request.form.get("query")
-    listings = list(mongo.db.listings.find({"$text": {"$search": query}}))
+    query = {
+            "make": request.form.get("make"),
+            "model": request.form.get("model"),
+            "length": request.form.get("length"),
+            "width": request.form.get("width"),
+            "year": request.form.get("year"),
+            "price": request.form.get("price"),
+            "beds": request.form.get("beds"),
+            "sleeps": request.form.get("sleeps"),
+            "location": request.form.get("location"),
+            "features": request.form.getlist("features")
+        }
+    listings = list(mongo.db.listings.find({"$object": {"$search": query}}))
     return render_template("listings.html", listings=listings)
 
 
@@ -320,8 +331,14 @@ def get_listings():
 
     """
     listings = mongo.db.listings.find()
+    features = mongo.db.features.find().sort("feature_name", 1)
+    makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
+    models = mongo.db.caravan_models.find().sort("caravan_model", 1)
+    locations = mongo.db.locations.find().sort("location", 1)
     return render_template(
-        "listing_templates/listings.html", listings=listings)
+        "listing_templates/listings.html", listings=listings,
+        features=features, makes=makes, models=models,
+        locations=locations)
 
 
 # DISPLAY ONE LISTNG VIEW
