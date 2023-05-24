@@ -186,6 +186,25 @@ def profile(username):
     return render_template("profile.html", username=username)
 
 
+# EDIT PROFILE VIEW
+@app.route("/edit_profile/<user_id>", methods=["GET", "POST"])
+@login_required
+def edit_profile(user_id):
+    if request.method == "POST":
+        apply = {
+            "first_name": request.form.get("first_name"),
+            "last_name": request.form.get("last_name"),
+            "email": request.form.get("email"),
+            "phone": request.form.get("phone")
+        }
+        mongo.db.users.update_one({"_id": ObjectId(user_id)}, {"$set": apply})
+        flash("Profile Update Applied")
+        return redirect(url_for(
+            "profile", username=session['user'], user_id=session['user']))
+    username = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    return render_template("edit_profile.html", username=username)
+
+
 # DISPLAY USERS VIEW
 @app.route("/get_users/<username>", methods=["GET", "POST"])
 @login_required
@@ -209,7 +228,8 @@ def edit_user(user_id):
         }
         mongo.db.users.update_one({"_id": ObjectId(user_id)}, {"$set": apply})
         flash("User Update Applied")
-        return redirect(url_for("get_users", username=session['user'], user_id=session['user']))
+        return redirect(url_for(
+            "get_users", username=session['user'], user_id=session['user']))
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     return render_template("edit_user.html", user=user)
 
