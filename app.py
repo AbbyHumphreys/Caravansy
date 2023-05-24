@@ -192,7 +192,8 @@ def profile(username):
     # find current user's username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})
-    return render_template("profile.html", username=username)
+    return render_template(
+        "dashboard_templates/profile.html", username=username)
 
 
 # EDIT PROFILE VIEW
@@ -296,8 +297,8 @@ def caravan_details(username):
     features = mongo.db.features.find()
     locations = mongo.db.locations.find()
     return render_template(
-        "caravan_details.html", username=username, makes=makes, 
-        models=models, features=features, locations=locations)
+        "dashboard_templates/caravan_details.html", username=username,
+        makes=makes, models=models, features=features, locations=locations)
 
 
 # SEARCH LISTINGS
