@@ -95,7 +95,7 @@ def about():
 
 
 # REGISTER VIEW
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/general_templates/register", methods=["GET", "POST"])
 def register():
     """
     render register page
@@ -124,7 +124,7 @@ def register():
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful")
         return redirect(url_for("profile", username=session["user"]))
-    return render_template("register.html")
+    return render_template("general_templates/register.html")
 
 
 # LOGIN VIEW
