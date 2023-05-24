@@ -68,7 +68,7 @@ def superuser_required(f):
 # ROUTES
 
 # HOME VIEW
-@app.route("/general_templates//")
+@app.route("/")
 def home():
     """
     renders home page
@@ -77,7 +77,7 @@ def home():
 
 
 # SELL VIEW
-@app.route("/general_templates/sell")
+@app.route("/sell")
 def sell():
     """
     renders sell page
@@ -86,7 +86,7 @@ def sell():
 
 
 # ABOUT VIEW
-@app.route("/general_templates/about")
+@app.route("/about")
 def about():
     """
     renders about page
@@ -95,7 +95,7 @@ def about():
 
 
 # REGISTER VIEW
-@app.route("/general_templates/register", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     """
     render register page
@@ -128,7 +128,7 @@ def register():
 
 
 # LOGIN VIEW
-@app.route("/general_templates/login", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """
     render login page
@@ -337,7 +337,7 @@ def display_listing(listing_id):
 
 
 # ADD LISTING VIEW
-@app.route("/listing_templates/add_listing", methods=["GET", "POST"])
+@app.route("/add_listing", methods=["GET", "POST"])
 @login_required
 def add_listing():
     """
@@ -381,7 +381,7 @@ def add_listing():
 
 
 # EDIT LISTING VIEW
-@app.route("/listing_templates/edit_listing/<listing_id>", methods=["GET", "POST"])
+@app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
 @login_required
 def edit_listing(listing_id):
     """
