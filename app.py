@@ -76,13 +76,13 @@ def home():
     return render_template("home.html")
 
 
-# BUY VIEW
-@app.route("/buy")
-def buy():
+# SELL VIEW
+@app.route("/general_templates/sell")
+def sell():
     """
-    renders buy page
+    renders sell page
     """
-    return render_template("buy.html")
+    return render_template("general_templates/sell.html")
 
 
 # REGISTER VIEW
