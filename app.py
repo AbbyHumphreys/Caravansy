@@ -68,12 +68,12 @@ def superuser_required(f):
 # ROUTES
 
 # HOME VIEW
-@app.route("/")
+@app.route("/general_templates//")
 def home():
     """
     renders home page
     """
-    return render_template("home.html")
+    return render_template("general_templates/home.html")
 
 
 # SELL VIEW
