@@ -466,7 +466,8 @@ def add_feature():
         mongo.db.features.insert_one(feature)
         flash("New Feature Added")
         return redirect(url_for("caravan_details", username=session['user']))
-    return render_template("add_feature.html")
+    return render_template(
+        "dashboard_templates/caravan_details_templates/add_feature.html")
 
 
 # EDIT FEATURE VIEW
@@ -489,7 +490,9 @@ def edit_feature(feature_id):
         flash("Feature Updated")
         return redirect(url_for("caravan_details", username=session['user']))
     feature = mongo.db.features.find_one({"_id": ObjectId(feature_id)})
-    return render_template("edit_feature.html", feature=feature)
+    return render_template(
+        "dashboard_templates/caravan_details_templates/edit_feature.html",
+        feature=feature)
 
 
 # DELETE FEATURE VIEW
@@ -532,7 +535,8 @@ def add_make():
         mongo.db.caravan_makes.insert_one(make)
         flash("New Caravan Make Added")
         return redirect(url_for("caravan_details", username=session['user']))
-    return render_template("add_caravan_make.html")
+    return render_template(
+        "dashboard_templates/caravan_details_templates/add_caravan_make.html")
 
 
 # EDIT MAKE VIEW
@@ -563,7 +567,9 @@ def edit_make(make_id):
         flash("Caravan Make Updated")
         return redirect(url_for("caravan_details", username=session['user']))
     make = mongo.db.caravan_makes.find_one({"_id": ObjectId(make_id)})
-    return render_template("edit_caravan_make.html", make=make)
+    return render_template(
+        "dashboard_templates/caravan_details_templates/edit_caravan_make.html",
+        make=make)
 
 
 # DELETE MAKE VIEW
@@ -599,7 +605,8 @@ def add_model():
 
         if existing_model:
             flash("Model already exists")
-            return redirect(url_for("caravan_details", username=session['user']))
+            return redirect(
+                url_for("caravan_details", username=session['user']))
             
         model = {
             "caravan_model": request.form.get("caravan_model").lower()
@@ -607,7 +614,8 @@ def add_model():
         mongo.db.caravan_models.insert_one(model)
         flash("New Caravan Model Added")
         return redirect(url_for("caravan_details", username=session['user']))
-    return render_template("add_caravan_model.html")
+    return render_template(
+        "dashboard_templates/caravan_details_templates/add_caravan_model.html")
 
 
 # EDIT MODEL VIEW
@@ -628,7 +636,8 @@ def edit_model(model_id):
 
         if existing_model:
             flash("Model already exists")
-            return redirect(url_for("caravan_details", username=session['user']))
+            return redirect(
+                url_for("caravan_details", username=session['user']))
 
         submit = {
             "caravan_model": request.form.get("caravan_model").lower()
@@ -638,7 +647,9 @@ def edit_model(model_id):
         flash("Caravan Model Updated")
         return redirect(url_for("caravan_details", username=session['user']))
     model = mongo.db.caravan_models.find_one({"_id": ObjectId(model_id)})
-    return render_template("edit_caravan_model.html", model=model)
+    return render_template(
+        "dashboard_templates/caravan_details_templates/edit_caravan_model.html",
+        model=model)
 
 
 # DELETE MODEL VIEW
@@ -682,7 +693,8 @@ def add_location():
         mongo.db.locations.insert_one(location)
         flash("New Location Added")
         return redirect(url_for("caravan_details", username=session['user']))
-    return render_template("add_location.html")
+    return render_template(
+        "dashboard_templates/caravan_details_templates/add_location.html")
 
 
 # EDIT LOCATION VIEW
@@ -714,7 +726,8 @@ def edit_location(location_id):
         flash("Location Updated")
         return redirect(url_for("caravan_details", username=session['user']))
     location = mongo.db.locations.find_one({"_id": ObjectId(location_id)})
-    return render_template("edit_location.html", location=location)
+    return render_template(
+        "dashboard_templates/caravan_details_templates/edit_location.html", location=location)
 
 
 # DELETE LOCATION VIEW
