@@ -316,7 +316,8 @@ def get_listings():
 
     """
     listings = mongo.db.listings.find()
-    return render_template("listing_templates/listings.html", listings=listings)
+    return render_template(
+        "listing_templates/listings.html", listings=listings)
 
 
 # DISPLAY ONE LISTNG VIEW
@@ -328,7 +329,7 @@ def display_listing(listing_id):
 
     """
     listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
-    return render_template("listing.html", listing=listing)
+    return render_template("listing_templates/listing.html", listing=listing)
 
 
 # ADD LISTING VIEW
