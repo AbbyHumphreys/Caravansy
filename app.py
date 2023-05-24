@@ -212,7 +212,8 @@ def edit_profile(user_id):
         return redirect(url_for(
             "profile", username=session['user'], user_id=session['user']))
     username = mongo.db.users.find_one({"_id": ObjectId(user_id)})
-    return render_template("edit_profile.html", username=username)
+    return render_template(
+        "dashboard_templates/edit_profile.html", username=username)
 
 
 # DISPLAY USERS VIEW
@@ -242,7 +243,7 @@ def edit_user(user_id):
         return redirect(url_for(
             "get_users", username=session['user'], user_id=session['user']))
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
-    return render_template("edit_user.html", user=user)
+    return render_template("dashboard_templates/edit_user.html", user=user)
 
 
 # DELETE USER VIEW
