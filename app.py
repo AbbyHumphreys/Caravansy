@@ -376,7 +376,7 @@ def add_listing():
 
 
 # EDIT LISTING VIEW
-@app.route("/edit_listing/<listing_id>", methods=["GET", "POST"])
+@app.route("/listing_templates/edit_listing/<listing_id>", methods=["GET", "POST"])
 @login_required
 def edit_listing(listing_id):
     """
@@ -407,7 +407,8 @@ def edit_listing(listing_id):
                 image_upload = cloudinary.uploader.upload(
                     image_to_upload, upload_preset="ulau1prq")
                 submit['image'] = image_upload["secure_url"]
-        mongo.db.listings.update_one({"_id": ObjectId(listing_id)}, {"$set": submit})
+        mongo.db.listings.update_one(
+            {"_id": ObjectId(listing_id)}, {"$set": submit})
         flash("Listing Updated")
         return redirect(url_for("get_listings"))
     features = mongo.db.features.find().sort("feature_name", 1)
@@ -416,7 +417,7 @@ def edit_listing(listing_id):
     locations = mongo.db.locations.find().sort("location", 1)
     listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
     return render_template(
-        "edit_listing.html", features=features, makes=makes, 
+        "listing_templates/edit_listing.html", features=features, makes=makes,
         models=models, locations=locations, listing=listing)
 
 
