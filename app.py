@@ -273,7 +273,8 @@ def dashboard(username):
         {"username": session["user"]})
     listings = mongo.db.listings.find()
     return render_template(
-        "dashboard.html", username=username, listings=listings)
+        "dashboard_templates/dashboard.html", username=username,
+        listings=listings)
 
 
 # CARAVAN DETAILS VIEW
