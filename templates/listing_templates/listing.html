@@ -8,22 +8,67 @@
             </div>
         </div>
         <div class="row text-center">
-            <div class="col">
+            <div class="col-12 col-md-8 mx-auto mb-5">
                 <img src="{{ listing.image }}" class="img-fluid"
                             alt="static caravan">
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-8">
-                <h1>£{{ listing.price }}</h1>
-                <h2>{{ listing.make|capitalize }} {{ listing.model|capitalize }}</h2>
-                <p>{{ listing.location|capitalize }}</p>
-                {% for feature in listing.features %}
-                <p>{{ feature }}</p>
-                {% endfor %}
-            </div>
-            <div class="col-12 col-lg-4">
-
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <h1 class="mb-4">£{{ listing.price }}</h1>
+                        <h2 class="mb-5">{{ listing.make|capitalize }} {{ listing.model|capitalize }}</h2>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="row mb-5">
+                            <div class="col-4 text-start">
+                                <i class="fa-solid fa-bed" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Bedrooms"></i>
+                                {{ listing.beds }}
+                            </div>
+                            <div class="col-4">
+                                <i class="fa-solid fa-users" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Sleeps"></i> 
+                                {{ listing.sleeps }}
+                            </div>
+                            <div class="col-4">
+                                <i class="fa-solid fa-location-dot" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Location"></i>
+                                {{ listing.location|capitalize }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-start">
+                                <i class="fa-solid fa-calendar" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Year"></i>
+                                {{ listing.year }}
+                            </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
+                                <i class="fa-solid fa-maximize" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Size"></i>
+                                {{ listing.length }}ft x {{ listing.width }}ft
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 d-flex flex-column">
+                        <h6 class="mb-3">Contact Seller:</h6>
+                        <button type="submit" class="btn btn-primary btn-sm mb-2" id="seller-phone-button">Phone</button>
+                        <button type="submit" class="btn btn-primary btn-sm mb-2 d-none" id="seller-phone-number">{{ user.phone }}</button>
+                        <button type="submit" class="btn btn-primary btn-sm" id="seller-email-button">Email</button>
+                        <button type="submit" class="btn btn-primary btn-sm d-none" id="seller-email">{{ user.email }}</button>
+                    </div>
+                    <div class="row mb-5">
+                        <h4>Features:</h4>
+                        {% for feature in listing.features %}
+                            <div class="col-12 col-md-3">
+                                <i class="fa-solid fa-check me-2"></i>
+                                {{ feature }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row mb-5">
+                        <h4>Description</h4>
+                        <p>{{ listing.description }}</p>
+                    </div>
+                </div> 
             </div>
         </div>
     </div>
