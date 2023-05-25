@@ -350,7 +350,12 @@ def display_listing(listing_id):
 
     """
     listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
-    return render_template("listing_templates/listing.html", listing=listing)
+    createdBy = mongo.db.listings.find_one(
+        {"_id": ObjectId(listing_id)})["created_by"]
+    user = mongo.db.users.find_one({"username": createdBy})
+    return render_template(
+        "listing_templates/listing.html",
+        listing=listing, createdBy=createdBy, user=user)
 
 
 # ADD LISTING VIEW
