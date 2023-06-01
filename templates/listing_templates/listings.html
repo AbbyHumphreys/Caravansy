@@ -37,7 +37,7 @@
                 <div class="col-12 col-lg-4 mb-3">
                     <div class="input-group">
                         <span class="input-group-text" id="year">Year:</span>
-                        <input type="number" class="form-control" value="{{ year }}" id="year" name="year" minlength="4" maxlength="4" aria-label="year" aria-describedby="year">
+                        <input type="text" class="form-control" value="{{ year }}" id="year" name="year" minlength="4" maxlength="4" aria-label="year" aria-describedby="year">
                     </div>
                 </div>
             </div>
@@ -45,19 +45,19 @@
                 <div class="col-12 col-lg-4 mb-3">
                     <div class="input-group">
                         <span class="input-group-text" id="price">Price:</span>
-                        <input type="number" class="form-control" value="{{ price }}" id="price" name="price" minlength="1" maxlength="8" aria-label="price" aria-describedby="price">
+                        <input type="text" class="form-control" value="{{ price }}" id="price" name="price" minlength="1" maxlength="8" aria-label="price" aria-describedby="price">
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 mb-3">
                     <div class="input-group">
                         <span class="input-group-text" id="beds">Bedrooms:</span>
-                        <input type="number" class="form-control" value="{{ beds }}" id="beds" name="beds" minlength="1" maxlength="1">
+                        <input type="text" class="form-control" value="{{ beds }}" id="beds" name="beds" minlength="1" maxlength="1">
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 mb-3">
                     <div class="input-group">
                         <span class="input-group-text" id="sleeps">Sleeps:</span>
-                        <input type="number" class="form-control" value="{{ sleeps }}" id="sleeps" name="sleeps" minlength="1" maxlength="2">
+                        <input type="text" class="form-control" value="{{ sleeps }}" id="sleeps" name="sleeps" minlength="1" maxlength="2">
                     </div>
                 </div>
             </div>
@@ -65,13 +65,13 @@
                 <div class=" col-12 col-lg-4 mb-3">
                     <div class="input-group">
                         <span class="input-group-text" id="length">Length (ft):</span>
-                        <input type="number" class="form-control" value="{{ length }}" id="length" name="length" minlength="2" maxlength="2">
+                        <input type="text" class="form-control" value="{{ length }}" id="length" name="length" minlength="2" maxlength="2">
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 mb-3">
                     <div class="input-group">
                         <span class="input-group-text" id="width">Width (ft):</span>
-                        <input type="number" class="form-control" value="{{ width }}" id="width" name="width" minlength="2" maxlength="2">
+                        <input type="text" class="form-control" value="{{ width }}" id="width" name="width" minlength="2" maxlength="2">
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 mb-3">
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <a class="btn btn-primary rounded-0" href="{{ url_for('get_listings') }}" role="button">Clear</a>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary rounded-0">Search</button>
         </form>
         <div class="row ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5">
             {% for listing in listings %}
@@ -123,7 +123,7 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-12">
-                                    <a href="{{ url_for('display_listing', listing_id=listing._id, user=user) }}" class="btn btn-primary card-link">See More</a>
+                                    <a href="{{ url_for('display_listing', listing_id=listing._id, user=user) }}" class="btn btn-primary card-link rounded-0">See More</a>
                                 </div>
                             </div>
                         </div>

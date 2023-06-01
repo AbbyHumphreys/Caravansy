@@ -30,11 +30,11 @@
                                         <li class="d-flex justify-content-between align-items-start pb-2">
                                             {{ make.caravan_make|capitalize }}
                                             <div class="dropdown">
-                                                <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0"
+                                                <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0 rounded-0"
                                                     type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="fa-solid fa-ellipsis"></i>
                                                 </button>
-                                                <ul class="dropdown-menu">
+                                                <ul class="dropdown-menu rounded-0">
                                                     <li><a class="dropdown-item" href="{{ url_for('edit_make', make_id=make._id) }}">Edit</a></li>
                                                     <li><a class="dropdown-item" href="{{ url_for('delete_make', make_id=make._id) }}">Delete</a></li>
                                                 </ul>
@@ -70,11 +70,11 @@
                                         <li class="d-flex justify-content-between align-items-start pb-2">
                                             {{ model.caravan_model|capitalize }}
                                             <div class="dropdown">
-                                                <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0"
+                                                <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0 rounded-0"
                                                     type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="fa-solid fa-ellipsis"></i>
                                                 </button>
-                                                <ul class="dropdown-menu">
+                                                <ul class="dropdown-menu rounded-0">
                                                     <li><a class="dropdown-item" href="{{ url_for('edit_model', model_id=model._id) }}">Edit</a>
                                                     </li>
                                                     <li><a class="dropdown-item" href="{{ url_for('delete_model', model_id=model._id) }}">Delete</a></li>
@@ -104,24 +104,28 @@
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#caravan_details">
                     <div class="accordion-body">
-                        <ul class="list-group">
-                            {% for feature in features %}
-                                <li class="d-flex justify-content-between align-items-start pb-2">
-                                    {{ feature.feature_name|capitalize }}
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0"
-                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-solid fa-ellipsis"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ url_for('edit_feature', feature_id=feature._id) }}">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="{{ url_for('delete_feature', feature_id=feature._id) }}">Delete</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        <div class="row">
+                            <div class="col-10">
+                                <ul class="list-group">
+                                    {% for feature in features %}
+                                        <li class="d-flex justify-content-between align-items-start pb-2">
+                                            {{ feature.feature_name|capitalize }}
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0 rounded-0"
+                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                </button>
+                                                <ul class="dropdown-menu rounded-0">
+                                                    <li><a class="dropdown-item" href="{{ url_for('edit_feature', feature_id=feature._id) }}">Edit</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="{{ url_for('delete_feature', feature_id=feature._id) }}">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,24 +145,28 @@
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#caravan_details">
                     <div class="accordion-body">
-                        <ul class="list-group">
-                            {% for location in locations %}
-                                <li class="d-flex justify-content-between align-items-start pb-2">
-                                    {{ location.location|capitalize }}
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0"
-                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-solid fa-ellipsis"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ url_for('edit_location', location_id=location._id) }}">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="{{ url_for('delete_location', location_id=location._id) }}">Delete</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        <div class="row">
+                            <div class="col-10">
+                                <ul class="list-group">
+                                    {% for location in locations %}
+                                        <li class="d-flex justify-content-between align-items-start pb-2">
+                                            {{ location.location|capitalize }}
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0 rounded-0"
+                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                </button>
+                                                <ul class="dropdown-menu rounded-0">
+                                                    <li><a class="dropdown-item" href="{{ url_for('edit_location', location_id=location._id) }}">Edit</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="{{ url_for('delete_location', location_id=location._id) }}">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

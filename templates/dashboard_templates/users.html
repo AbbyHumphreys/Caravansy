@@ -29,11 +29,11 @@
                             <form method="POST"
                                 action="{{ url_for('get_users', username=session['user'], user_id=session['user']) }}">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0"
+                                    <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0 rounded-0"
                                         type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis"></i>
                                     </button>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu rounded-0">
                                         <li><a class="dropdown-item"
                                                 href="{{ url_for('edit_user', user_id=user._id) }}">Edit</a>
                                         </li>
