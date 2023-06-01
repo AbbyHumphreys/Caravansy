@@ -10,7 +10,7 @@
                 <p>Contact the owner either by email or phone</p>
             </div>
         </div>
-        <form method="POST" action="{{ url_for('search') }}" class="ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
+        <form method="POST" action="{{ url_for('search', listings=listings) }}" class="ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
             <div class="row">
                 <div class="col-12 col-lg-4 mb-3">
                     <div class="input-group">
