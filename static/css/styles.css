@@ -6,6 +6,16 @@ body {
     font-weight: 300;
 }
 
+strong {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.title-1 {
+    font-weight: 700;
+    font-size: 3rem;
+}
+
 /*--------------------------------------------------------- Colors */
 .bg-color-1 {
     background-color: #2bfc82;
@@ -75,11 +85,6 @@ body {
 .paragraph-card {
     font-weight: 300;
     font-size: 0.8em;
-}
-
-.buy-hero {
-    font-weight: 700;
-    font-size: 3rem;
 }
 
 .negative-margin {
