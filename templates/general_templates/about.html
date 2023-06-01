@@ -1,34 +1,59 @@
 {% extends "base_templates/base.html" %}
 {% block content %}
 
-<section id="buy-section">
+<section id="about-section">
     <div class="row d-flex pb-5 pt-5 bg-color-4">
         <div class="col-12 d-flex flex-column ms-5">
-            <h1 class="text-capitalize pt-5 buy-hero">Sell your static caravan <span class="underline">your way</span></h1>
-            <p class="pb-3 mt-3">At Caravansy, we look for new, innovative ways to sell your caravan. Let's us do the work for you, matching buyers with sellers in unique, convienient ways.</p>
-            <a class="btn btn-primary rounded-0 mt-5 mb-5 align-self-start" href="{{ url_for('register') }}" role="button">List Caravan</a>
-        </div>
-    </div>
-    <div class="row d-flex mb-5 negative-margin">
-        <div class="col-12">
-            <img src="{{ url_for('static', filename='images/caravan-park-one.webp') }}" class="img-fluid w-75 mx-auto d-block" alt="couple in a caravan">
+            <h1 class="text-capitalize pt-5 title-1">About <span class="underline">Us</span></h1>
+            <p class="pt-3 mt-3">
+                <strong class="txt-color-1 me-2">Caravansy</strong> is a small, friendly company with small origins. 
+                We started in a small town in the North Coast of Wales and have grown
+                to serve customers needs around the UK and Europe.
+            </p>
+            <p>
+                We delight at meeting our customers needs and know that a caravan needs
+                to be as special as your own home.
+            </p>
+            <p>
+                At Caravansy, we look for new, innovative ways to sell your caravan. 
+                Let's us do the work for you, matching buyers with sellers in unique, 
+                convienient ways.
+            </p>
+            <p>
+                Learn more about the Directors below
+            </p>
         </div>
     </div>
 </section>
-<section id="how-it-works-section">
+<section id="director-one-section">
     <div class="row mt-5 pt-5 ps-5 pe-5 ms-5 me-5">
         <div class="col-12 col-lg-6 ps-5">
-            <h3 class="mb-4 pb-4">How it works:</h3>
-            <ul class="mb-4 pb-4">
-                <li class="ms-4 mb-3">Register with us to gain access to features</li>
-                <li class="ms-4 mb-3">Add your caravan information onto a listing</li>
-                <li class="ms-4 mb-3">Put your listing in front of 1000s of viewers</li>
-                <li class="ms-4 mb-3">Buyers will contact you directly</li>
-            </ul>
-            <a class="btn btn-primary rounded-0 mb-2 align-self-start" href="{{ url_for('register') }}" role="button">Register Now</a>
+            <h3 class="mb-4 pb-4">Jennifer Docker</h3>
+            <p>
+                Jennifer is a Colwyn Bay based static caravan enthusiast
+                with extensive background in the industry. She's worked with hundreds of
+                customers from all parts of the of the UK and Europe. She holds an BA(Hons) 
+                in Business Studies from The Nottingham Trent University.
+            </p>
         </div>
         <div class="col-12 col-lg-6 pe-5">
-            <img src="{{ url_for('static', filename='images/caravan-park-one.webp') }}" class="img-fluid" alt="couple in a caravan">
+            <img src="{{ url_for('static', filename='images/jennifer-docker-about.webp') }}" class="img-fluid" alt="Jennifer Docker - Director">
+        </div>
+    </div>
+</section>
+<section id="director-two-section">
+    <div class="row mt-5 mb-5 pt-5 ps-5 pe-5 ms-5 me-5">
+        <div class="col-12 col-lg-6 ps-5">
+            <h3 class="mb-4 pb-4">Sita Kunda</h3>
+            <p>
+                Sita has been working in the caravan industry for over 8 years,
+                honing her vision for a better way for consumers to buy and sell
+                static caravans. After working with one of the best caravan manufacturers
+                in the UK, Sita knows customers needs inside out.
+            </p>
+        </div>
+        <div class="col-12 col-lg-6 pe-5">
+            <img src="{{ url_for('static', filename='images/sita-kunda-about.webp') }}" class="img-fluid" alt="Sita Kunda - Director">
         </div>
     </div>
 </section>
