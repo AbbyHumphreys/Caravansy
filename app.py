@@ -308,15 +308,15 @@ def search():
     search_form_data = {
                 "make": request.form.get("make"),
                 "model": request.form.get("model"),
-                # "length": request.form.get("length"),
-                # "width": request.form.get("width"),
-                # "year": request.form.get("year"),
-                # "price": request.form.get("price"),
-                # "beds": request.form.get("beds"),
-                # "sleeps": request.form.get("sleeps"),
+                # "length": str(request.form.get("length", type=str)),
+                # "width": int(request.form.get("width")),
+                # "year": str(request.form.get("year", type=str)),
+                # "price": int(request.form.get("price")),
+                # "beds": int(request.form.get("beds")),
+                # "sleeps": int(request.form.get("sleeps")),
                 "location": request.form.get("location")
             }
-    query = {k: v for k, v in search_form_data.items() if v is not None}
+    query = {k: v for k, v in search_form_data.items() if v is not None or ''}
     listings = mongo.db.listings.find(query)
     features = mongo.db.features.find().sort("feature_name", 1)
     makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
@@ -329,7 +329,7 @@ def search():
 
 
 # DISPLAY ALL LISTINGS VIEW
-@app.route("/get_listings", methods=["GET", "POST"])
+@app.route("/get_listings")
 def get_listings():
     """
     find all the listings in the db
