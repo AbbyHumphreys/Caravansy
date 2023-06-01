@@ -303,27 +303,33 @@ def caravan_details(username):
         makes=makes, models=models, features=features, locations=locations)
 
 
-# SEARCH LISTINGS
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    query = {
-            "make": request.form.get("make"),
-            "model": request.form.get("model"),
-            "length": request.form.get("length"),
-            "width": request.form.get("width"),
-            "year": request.form.get("year"),
-            "price": request.form.get("price"),
-            "beds": request.form.get("beds"),
-            "sleeps": request.form.get("sleeps"),
-            "location": request.form.get("location"),
-            "features": request.form.getlist("features")
-        }
-    listings = list(mongo.db.listings.find({"$object": {"$search": query}}))
-    return render_template("listings.html", listings=listings)
+    search_form_data = {
+                "make": request.form.get("make"),
+                "model": request.form.get("model"),
+                # "length": request.form.get("length"),
+                # "width": request.form.get("width"),
+                # "year": request.form.get("year"),
+                # "price": request.form.get("price"),
+                # "beds": request.form.get("beds"),
+                # "sleeps": request.form.get("sleeps"),
+                "location": request.form.get("location")
+            }
+    query = {k: v for k, v in search_form_data.items() if v is not None}
+    listings = mongo.db.listings.find(query)
+    features = mongo.db.features.find().sort("feature_name", 1)
+    makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
+    models = mongo.db.caravan_models.find().sort("caravan_model", 1)
+    locations = mongo.db.locations.find().sort("location", 1)
+    return render_template(
+        "listing_templates/listings.html", listings=listings,
+        features=features, makes=makes, models=models,
+        locations=locations)
 
 
 # DISPLAY ALL LISTINGS VIEW
-@app.route("/get_listings")
+@app.route("/get_listings", methods=["GET", "POST"])
 def get_listings():
     """
     find all the listings in the db
