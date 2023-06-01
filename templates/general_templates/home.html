@@ -1,11 +1,15 @@
 {% extends "base_templates/base.html" %}
 {% block content %}
 
-<section id="hero-section">
+<section id="list-a-caravan-section">
     <div class="row d-flex mb-5">
         <div class="col-12 col-lg-6 d-flex flex-column my-auto">
             <h1 class="text-capitalize ms-5">A better way to sell your <span class="underline"><br>static caravan</span></h1>
-            <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="#" role="button">List Caravan</a>
+            {% if session.user %}
+                <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('add_listing') }}" role="button">List Caravan</a>
+            {% else %}
+                <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('register') }}" role="button">List Caravan</a>
+            {% endif %}
         </div>
         <div class="col-12 col-lg-6">
             <img src="{{ url_for('static', filename='images/hero-image.webp') }}" class="img-fluid w-75 mx-auto d-block" alt="couple in a caravan">
