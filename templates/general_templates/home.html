@@ -8,7 +8,7 @@
             {% if session.user %}
                 <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('add_listing') }}" role="button">List Caravan</a>
             {% else %}
-                <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('register') }}" role="button">List Caravan</a>
+                <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5 mb-5" href="{{ url_for('register') }}" role="button">List Caravan</a>
             {% endif %}
         </div>
         <div class="col-12 col-lg-8">
@@ -32,7 +32,7 @@
 <section id="buy-a-caravan-section">
     <div class="row d-flex mt-5 mb-5">
         <div class="col-12 col-lg-8">
-            <img src="{{ url_for('static', filename='images/static-caravan-one.webp') }}" class="img-fluid w-75 mx-auto d-block" alt="couple in a caravan">
+            <img src="{{ url_for('static', filename='images/static-caravan-one.webp') }}" class="img-fluid w-75 mx-auto d-block mb-5" alt="couple in a caravan">
         </div>
         <div class="col-12 col-lg-4 d-flex flex-column my-auto">
             <h1 class="text-capitalize ms-5">Find your perfect <span class="underline"><br>static caravan</span></h1>
