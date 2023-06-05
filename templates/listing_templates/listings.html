@@ -2,9 +2,9 @@
 {% block content %}
 
     <div class="container-fluid">
-        <div class="row ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-lg-5">
+        <div class="row ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
             <div class="col text-center">
-                <h3>Find Your Perfect Static Caravan</h3>
+                <h3 class="mb-5">Find Your Perfect Static Caravan</h3>
                 <p class="mb-0">Browse our selection of privately owned caravans</p>
                 <p class="mb-0">See one you like, click through to see more information</p>
                 <p>Contact the owner either by email or phone</p>
@@ -89,7 +89,7 @@
             <a class="btn btn-primary rounded-0" href="{{ url_for('get_listings') }}" role="button">Clear</a>
             <button type="submit" class="btn btn-primary rounded-0">Search</button>
         </form>
-        <div class="row ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5">
+        <div class="row ms-md-2 me-md-2 ms-lg-5 me-lg-5 mb-5 ps-lg-5 pe-lg-5">
             {% for listing in listings %}
                 <div class="col-lg-4 mb-3 ">
                     <div class="card h-100 d-flex align-items-stretch">
