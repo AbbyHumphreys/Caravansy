@@ -46,6 +46,10 @@ strong {
     color: #fff;
 }
 
+.txt-color-3 {
+    color: #000;
+}
+
 .border-color-1 {
     border-color: #2bfc82;
 }
@@ -127,3 +131,25 @@ strong {
 .title-2 {
     font-size: 1rem;
 }
+
+
+/*  animation taken and adapted from 
+    https://bytutorial.com/blogs/css3/how-to-create-blinking-background-color-and-text-using-css3-animation */
+    
+.flashes {
+    border-width: 3px;
+    animation: blinkingBackground 2s;
+	}
+	@keyframes blinkingBackground{
+		0%		{ background-color: #fff;}
+		25%		{ background-color: #2bfc82}
+        50%		{ background-color: #fff}
+        75%		{ background-color: #2bfc82}
+        50%		{ background-color: #fff}
+	}
+
+.flashes-body {
+    font-weight: 700;
+    font-size: 20;
+}
+
