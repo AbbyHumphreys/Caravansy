@@ -65,12 +65,14 @@
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       {% for message in messages %}
-        <div class="row flashes">
-          <h3 class="text-center mb-3">{{ message }}</h3>
+        <div class="card rounded-0 border-color-1 mb-5 mx-auto flashes" style="width: 18rem;">
+          <div class="card-body">
+            <p class="card-text txt-color-3 text-center flashes-body"><i class="fa-solid fa-circle-info"></i> {{ message }}</p>
+          </div>
         </div>
       {% endfor %}
     {% endif %}
-  {% endwith %}
+  {% endwith %}  
 
   <main>
     {% block content %}
