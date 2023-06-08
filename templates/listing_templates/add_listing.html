@@ -19,7 +19,7 @@
                             {% for make in makes %}
                                 <option value="{{ make.caravan_make }}">{{ make.caravan_make|capitalize }}</option>
                             {% endfor %}
-                          </select>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="model" class="form-label">Model:</label>
@@ -28,31 +28,33 @@
                             {% for model in models %}
                                 <option value="{{ model.caravan_model }}">{{ model.caravan_model|capitalize }}</option>
                             {% endfor %}
-                          </select>
+                        </select>
                     </div>
+                    <!-- step attribute for allowing decimals researched from this website:
+                    https://stackoverflow.com/questions/24163889/html5-input-for-money-currency -->
                     <div class="mb-3">
                         <label for="price" class="form-label">Price (£):</label>
-                        <input type="number" class="form-control" id="price" name="price" minlength="1" maxlength="8" required>
+                        <input type="number" step="any" class="form-control" id="price" name="price" minlength="1" maxlength="8" required>
                     </div>
                     <div class="mb-3">
                         <label for="year" class="form-label">Year:</label>
-                        <input type="number" class="form-control" id="year" name="year" minlength="4" maxlength="4" required>
+                        <input type="number"class="form-control" id="year" name="year" minlength="4" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
                     <div class="mb-3">
                         <label for="beds" class="form-label">Bedrooms:</label>
-                        <input type="number" class="form-control" id="beds" name="beds" minlength="1" maxlength="1" required>
+                        <input type="number" class="form-control" id="beds" name="beds" minlength="1" maxlength="1" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
                     <div class="mb-3">
                         <label for="sleeps" class="form-label">Sleeps:</label>
-                        <input type="number" class="form-control" id="sleeps" name="sleeps" minlength="1" maxlength="2" required>
+                        <input type="number" class="form-control" id="sleeps" name="sleeps" minlength="1" maxlength="1" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
                     <div class="mb-3">
                         <label for="length" class="form-label">Length (ft):</label>
-                        <input type="number" class="form-control" id="length" name="length" minlength="2" maxlength="2" required>
+                        <input type="number" class="form-control" id="length" name="length" minlength="2" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
                     <div class="mb-3">
                         <label for="width" class="form-label">Width (ft):</label>
-                        <input type="number" class="form-control" id="width" name="width" minlength="2" maxlength="2" required>
+                        <input type="number" class="form-control" id="width" name="width" minlength="2" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Location:</label>
