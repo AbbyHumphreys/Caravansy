@@ -106,15 +106,26 @@ def register():
 
     """
     if request.method == "POST":
-        # check if username already exists in db
+        # check if username or email already exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
+        
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
 
-        if existing_user:
-            flash("Username already exists")
+        if existing_user or existing_email:
+            if existing_user:
+                flash("This username is already in use")
+            elif existing_email:
+                flash("This email address is already in use")
             return redirect(url_for("register"))
 
+        # insert new user details into db
         register = {
+            "first_name": request.form.get("first_name").lower(),
+            "last_name": request.form.get("last_name").lower(),
+            "email": request.form.get("email").lower(),
+            "phone": request.form.get("phone"),
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
@@ -201,6 +212,14 @@ def profile(username):
 @login_required
 def edit_profile(user_id):
     if request.method == "POST":
+        # check if email already exists in db
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
+        if existing_email:
+            flash("This email address is already in use")
+            return redirect(url_for(
+                "profile", username=session['user'], user_id=session['user']))
+
         apply = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
@@ -208,7 +227,7 @@ def edit_profile(user_id):
             "phone": request.form.get("phone")
         }
         mongo.db.users.update_one({"_id": ObjectId(user_id)}, {"$set": apply})
-        flash("Profile Update Applied")
+        flash("Profile Updated")
         return redirect(url_for(
             "profile", username=session['user'], user_id=session['user']))
     username = mongo.db.users.find_one({"_id": ObjectId(user_id)})
