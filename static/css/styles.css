@@ -153,3 +153,7 @@ strong {
     font-size: 20;
 }
 
+.form-notes {
+    color: red;
+    font-size: 0.8rem;
+}
