@@ -8,6 +8,30 @@
                 <p class="ms-5">Register to add your static caravan for sale</p>
                 <p class="ms-5">Already have an account? <a href="{{ url_for('login') }}" class="underline">Sign In</a></p>
                 <form method="POST" action="{{ url_for('register') }}">
+                    <!-- first name -->
+                    <div class="ms-5 mb-3">
+                        <label for="first_name" class="form-label">First Name:</label>
+                        <input type="text" class="form-control" name="first_name" id="first_name" 
+                          minlength="2" maxlength="15" pattern="^[a-zA-Z]{2,15}$" aria-describedby="first name" required>
+                    </div>
+                    <!-- last name -->
+                    <div class="ms-5 mb-3">
+                        <label for="last_name" class="form-label">Last Name:</label>
+                        <input type="text" class="form-control" name="last_name" id="last_name" 
+                          minlength="2" maxlength="15" pattern="^[a-zA-Z]{2,15}$" aria-describedby="last name" required>
+                    </div>
+                    <!-- email -->
+                    <div class="ms-5 mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" name="email" id="email" 
+                          minlength="5" maxlength="30" aria-describedby="email" required>
+                    </div>
+                    <!-- phone -->
+                    <div class="ms-5 mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="number" class="form-control" name="phone" id="phone" 
+                          minlength="11" maxlength="11" pattern="^[0-9]{5,15}$" aria-describedby="phone" required>
+                    </div>
                     <!-- username -->
                     <div class="ms-5 mb-3">
                       <label for="username" class="form-label">Username</label>
