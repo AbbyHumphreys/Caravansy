@@ -20,7 +20,7 @@
                                     Listings
                                 </a>
                             </li>
-                            {% if is_superuser == True %}
+                            {% if username.is_superuser == "on" %}
                             <li class="sidebar-item mb-4">
                                 <a href="{{ url_for('get_users', username=session['user'], user_id=session['user']) }}"
                                     class="sidebar-anchor">
