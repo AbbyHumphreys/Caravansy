@@ -1,0 +1,14 @@
+{% extends "base_templates/base.html" %}
+{% block content %}
+<section id="list-a-caravan-section">
+    <div class="row d-flex mb-5 ps-5 pe-5">
+        <div class="col-12 col-lg-4 d-flex flex-column my-auto">
+            <h1 class="text-capitalize mb-5"><span class="underline">Oops!</span></h1>
+            <h4>{{ message }}</h4>
+        </div>
+        <div class="col-12 col-lg-7 ms-5">
+            <img src="{{ url_for('static', filename='images/hero-image.webp') }}" class="img-fluid w-75 mx-auto d-block" alt="couple in a caravan">
+        </div>
+    </div>
+</section>
+{% endblock %}
