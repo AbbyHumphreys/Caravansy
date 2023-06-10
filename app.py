@@ -331,10 +331,10 @@ def caravan_details(username):
     # find current user's username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})
-    makes = mongo.db.caravan_makes.find()
+    makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
     models = mongo.db.caravan_models.find().sort("caravan_model", 1)
     features = mongo.db.features.find()
-    locations = mongo.db.locations.find()
+    locations = mongo.db.locations.find().sort("location", 1)
     return render_template(
         "dashboard_templates/caravan_details.html", username=username,
         makes=makes, models=models, features=features, locations=locations)
