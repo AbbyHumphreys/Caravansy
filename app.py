@@ -241,15 +241,12 @@ def edit_profile(user_id):
 @superuser_required
 def get_users(username):
     # determine if user is a superuser
-    # pass is_super user through to hide superuser dashboard menu items
-    is_superuser = mongo.db.users.find_one(
-        {"username": session["user"]})["is_superuser"]
     username = mongo.db.users.find_one(
         {"username": session["user"]})
     users = list(mongo.db.users.find())
     return render_template(
         "dashboard_templates/users.html",
-        username=username, users=users, is_superuser=is_superuser)
+        username=username, users=users)
 
 
 # EDIT USER VIEW
