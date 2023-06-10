@@ -2,7 +2,7 @@
 import os
 from flask import (
     Flask, flash, render_template, 
-    redirect, request, session, url_for)
+    redirect, request, session, url_for, abort)
 from functools import wraps
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -796,6 +796,44 @@ def delete_location(location_id):
     mongo.db.locations.delete_one({"_id": ObjectId(location_id)})
     flash("Location Deleted")
     return redirect(url_for("caravan_details", username=session['user']))
+
+
+# ERROR HANDLING
+# method found on: https://www.youtube.com/watch?v=lpGN71azPLk
+# and https://flask.palletsprojects.com/en/2.1.x/errorhandling/
+@app.errorhandler(400)
+def bad_request(e):
+    message = "I had trouble understanding what you wanted. Please try again."
+    return render_template(
+        'general_templates/error.html', error_status=e, message=message), 400
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    message = "It seems this page is missing. Try using the menu above."
+    return render_template(
+        'general_templates/error.html', error_status=e, message=message), 404
+
+
+@app.errorhandler(408)
+def request_timeout(e):
+    message = "Your request exceed the maximum wait time. Please try again."
+    return render_template(
+        'general_templates/error.html', error_status=e, message=message), 408
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    message = "There's a problem with our server. Please try again soon."
+    return render_template(
+        'general_templates/error.html', error_status=e, message=message), 500
+
+
+@app.errorhandler(503)
+def service_unavailable(e):
+    message = "There's a problem at the moment. Please try again soon."
+    return render_template(
+        'general_templates/error.html', error_status=e, message=message), 503
 
 
 if __name__ == "__main__":
