@@ -54,6 +54,33 @@ strong {
     border-color: #2bfc82;
 }
 
+/*--------------------------------------------------------- Buttons */
+
+.btn-primary {
+    background-color: #2bfc82;
+    color: #000;
+    font-weight: 700;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #2bfc82;
+    font-weight: 700;
+    border: solid 1px #2bfc82;
+}
+
+.btn-outline-primary {
+    border-color: #2bfc82;
+    color: #2bfc82;
+}
+
+.btn-outline-primary:hover {
+    background-color: #2bfc82;
+    border-color: #fff;
+    color: #fff;
+}
+
 /*--------------------------------------------------------- Navbar */
 .navbar-brand {
     font-weight: 700;
@@ -73,13 +100,6 @@ strong {
 .underline {
     text-decoration: solid underline #2bfc82;
     text-underline-offset: 0.5em;
-}
-
-.btn-primary {
-    background-color: #2bfc82;
-    color: #000;
-    font-weight: 700;
-    border: none;
 }
 
 .flashes {
