@@ -57,7 +57,7 @@ def superuser_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         is_superuser = mongo.db.users.find_one(
-        {"username": session["user"]})["is_superuser"]
+            {"username": session["user"]})["is_superuser"]
         if is_superuser == "off":
             flash("You must be a superuser to view this page")
             return redirect(url_for('login'))
@@ -200,6 +200,11 @@ def profile(username):
     pass through username for welcome message
 
     """
+    # check if user is in session
+    # if not redirect to the login page
+    if "user" not in session:
+        flash("Please log in to view your profile")
+        return redirect(url_for("login"))
     # find current user's username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})
@@ -212,6 +217,11 @@ def profile(username):
 @login_required
 def edit_profile(user_id):
     if request.method == "POST":
+        # check if user is in session
+        # if not redirect to the login page
+        if "user" not in session:
+            flash("Please log in to edit your profile")
+            return redirect(url_for("login"))
         # check if email already exists in db
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
@@ -279,7 +289,8 @@ def delete_user(user_id):
     """
     mongo.db.users.delete_one({"_id": ObjectId(user_id)})
     flash("User Deleted")
-    return redirect(url_for("get_users", username=session['user'], user_id=session['user']))
+    return redirect(url_for(
+        "get_users", username=session['user'], user_id=session['user']))
 
 
 # DASHBOARD / USER'S LISTINGS VIEW
@@ -292,6 +303,11 @@ def dashboard(username):
     pass through username for welcome message
 
     """
+    # check if user is in session
+    # if not redirect to the login page
+    if "user" not in session:
+        flash("Please log in to view your dashboard")
+        return redirect(url_for("login"))
     # find current user's username from the db
     username = mongo.db.users.find_one(
         {"username": session["user"]})
@@ -396,6 +412,10 @@ def add_listing():
     redirect to listings page
 
     """
+    if "user" not in session:
+        flash("Please log in to add a listing")
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         image_to_upload = request.files["image"]
         if image_to_upload:
@@ -441,6 +461,11 @@ def edit_listing(listing_id):
 
     """
     if request.method == "POST":
+        listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
+        if "user" not in session or session["user"] != listing["created_by"]:
+            flash("Listings can only be edited by their owners")
+            return redirect(url_for("get_listings"))
+
         submit = {
             "make": request.form.get("make"),
             "model": request.form.get("model"),
@@ -484,6 +509,10 @@ def delete_listing(listing_id):
     redirect to listings page
 
     """
+    listing = mongo.db.listings.find_one({"_id": ObjectId(listing_id)})
+    if "user" not in session or session["user"] != listing["created_by"]:
+        flash("Listings can only be deleted by their owners")
+        return redirect(url_for("get_listings"))
     mongo.db.listings.delete_one({"_id": ObjectId(listing_id)})
     flash("Listing Deleted")
     return redirect(url_for("dashboard", username=session['user']))
