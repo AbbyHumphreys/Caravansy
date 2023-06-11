@@ -1,12 +1,15 @@
 {% extends "base_templates/base.html" %}
 {% block content %}
     
+    <!-- template for side navigation in dashboard areas -->
     <section>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-lg-3">
                     <div class="sidebar">
+                        <!-- displays the current user's username -->
                         <h4 class="ms-5 mb-4 pt-5">{{ username.username|capitalize }}'s Dashboard</h4>
+                        <!-- SIDE BAR NAVIGATIONS -->
                         <ul class="sidebar-list ms-3">
                             <li class="sidebar-item mb-4">
                                 <a href="{{ url_for('profile', username=session['user']) }}" class="sidebar-anchor">
@@ -20,6 +23,7 @@
                                     Listings
                                 </a>
                             </li>
+                            <!-- display following nav links if user is a superuser -->
                             {% if username.is_superuser == "on" %}
                             <li class="sidebar-item mb-4">
                                 <a href="{{ url_for('get_users', username=session['user'], user_id=session['user']) }}"
