@@ -2,102 +2,108 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap Link -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-    type="text/css">
-  <!-- Font Awesome Link -->
-  <script src="https://kit.fontawesome.com/2d6908b6f2.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-  {% block styles %}
-  {% endblock %}
-  <title>Caravansy</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap Link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+        type="text/css">
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/2d6908b6f2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block styles %}
+    {% endblock %}
+    <title>Caravansy</title>
 </head>
 
 <body>
+    <!-- NAVIGATION BAR -->
+    <header>
+        <nav class="navbar navbar-expand-lg mt-3 mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand ms-4" href="{{ url_for('home') }}">caravan<span class="txt-color-1">sy</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item ms-lg-5 me-5">
+                            <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item ms-lg-5 me-5">
+                            <a class="nav-link" href="{{ url_for('get_listings') }}">Buy</a>
+                        </li>
+                        <li class="nav-item ms-lg-5 me-5">
+                            <a class="nav-link" href="{{ url_for('sell') }}">Sell</a>
+                        </li>
+                        <li class="nav-item ms-lg-5 me-5">
+                            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                        </li>
+                        <!-- show dashboad nav link if a user is signed in -->
+                        {% if session.user %}
+                            <li class="nav-item ms-lg-5 me-5">
+                                <a class="nav-link"
+                                    href="{{ url_for('dashboard', username=session['user']) }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item ms-lg-5 me-5">
+                                <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+                            </li>
+                        <!-- hide these nav links if a user is signed in -->
+                        {% else %}
+                            <li class="nav-item ms-lg-5 me-1">
+                                <a class="nav-link txt-color-1 " href="{{ url_for('login') }}">Sign In</a>
+                            </li>
+                            <li class="nav-item me-5 bg-color-1">
+                                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  <header>
-    <nav class="navbar navbar-expand-lg mt-3 mb-3">
-      <div class="container-fluid">
-        <a class="navbar-brand ms-4" href="{{ url_for('home') }}">caravan<span class="txt-color-1">sy</span></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item ms-lg-5 me-5">
-              <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
-            </li>
-            <li class="nav-item ms-lg-5 me-5">
-              <a class="nav-link" href="{{ url_for('get_listings') }}">Buy</a>
-            </li>
-            <li class="nav-item ms-lg-5 me-5">
-              <a class="nav-link" href="{{ url_for('sell') }}">Sell</a>
-            </li>
-            <li class="nav-item ms-lg-5 me-5">
-              <a class="nav-link" href="{{ url_for('about') }}">About</a>
-            </li>
-            {% if session.user %}
-              <li class="nav-item ms-lg-5 me-5">
-                <a class="nav-link" href="{{ url_for('dashboard', username=session['user']) }}">Dashboard</a>
-              </li>
-              <li class="nav-item ms-lg-5 me-5">
-                <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
-              </li>
-            {% else %}
-              <li class="nav-item ms-lg-5 me-1">
-                <a class="nav-link txt-color-1 " href="{{ url_for('login') }}">Sign In</a>
-              </li>
-              <li class="nav-item me-5 bg-color-1">
-                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <!-- flash message -->
-  {% with messages = get_flashed_messages() %}
+    <!-- FLASH MESSAGES DISPLAY -->
+    {% with messages = get_flashed_messages() %}
     {% if messages %}
-      {% for message in messages %}
-        <div class="card rounded-0 border-color-1 mb-5 mx-auto flashes" style="width: 18rem;">
-          <div class="card-body">
-            <p class="card-text txt-color-3 text-center flashes-body"><i class="fa-solid fa-circle-info"></i> {{ message }}</p>
-          </div>
+    {% for message in messages %}
+    <div class="card rounded-0 border-color-1 mb-5 mx-auto flashes" style="width: 18rem;">
+        <div class="card-body">
+            <p class="card-text txt-color-3 text-center flashes-body"><i class="fa-solid fa-circle-info"></i>
+                {{ message }}</p>
         </div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}  
-
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
-
-  <footer class=" border-top border-3 bg-color-3">
-    <div class="container-fluid bg-color-2 txt-color-2">
-      <div class="row">
-        <div class="col-12 col-lg-6 mt-5 mb-lg-5">
-          Abby Humphreys
-        </div>
-        <div class="col-12 col-lg-6 mt-lg-5 mb-5 text-lg-end">
-          Site for educational purposes only
-        </div>
-      </div>
     </div>
-  </footer>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
-  <!-- Bootstrap Javascript Link -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Local Script Link -->
-  <script src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>
-  {% block scripts %}
-  {% endblock %}
+    <!-- MAIN CONTENT -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class=" border-top border-3 bg-color-3">
+        <div class="container-fluid bg-color-2 txt-color-2">
+            <div class="row">
+                <div class="col-12 col-lg-6 mt-5 mb-lg-5">
+                    Abby Humphreys
+                </div>
+                <div class="col-12 col-lg-6 mt-lg-5 mb-5 text-lg-end">
+                    Site for educational purposes only
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Javascript Link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Local Script Link -->
+    <script src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
 
 </body>
 
