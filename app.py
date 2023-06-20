@@ -342,27 +342,10 @@ def caravan_details(username):
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    search_form_data = {
-                "make": request.form.get("make"),
-                "model": request.form.get("model"),
-                # "length": str(request.form.get("length", type=str)),
-                # "width": int(request.form.get("width")),
-                # "year": str(request.form.get("year", type=str)),
-                # "price": int(request.form.get("price")),
-                # "beds": int(request.form.get("beds")),
-                # "sleeps": int(request.form.get("sleeps")),
-                "location": request.form.get("location")
-            }
-    query = {k: v for k, v in search_form_data.items() if v is not None or ''}
-    listings = mongo.db.listings.find(query)
-    features = mongo.db.features.find().sort("feature_name", 1)
-    makes = mongo.db.caravan_makes.find().sort("caravan_make", 1)
-    models = mongo.db.caravan_models.find().sort("caravan_model", 1)
-    locations = mongo.db.locations.find().sort("location", 1)
+    query = request.form.get("query")
+    listings = mongo.db.listings.find({"$text": {"$search": query}})
     return render_template(
-        "listing_templates/listings.html", listings=listings,
-        features=features, makes=makes, models=models,
-        locations=locations)
+        "listing_templates/listings.html", listings=listings)
 
 
 # DISPLAY ALL LISTINGS VIEW
