@@ -2,74 +2,87 @@
 {% block content %}
 
     <div class="container-fluid">
+        <!-- button takes user back back one page in the session history -->
         <div class="row mb-3">
             <div class="col">
                 <button type="button" class="btn btn-primary rounded-0" onclick="history.back()">Cancel</button>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-12 col-md-8 mx-auto mb-5">
-                <img src="{{ listing.image }}" class="img-fluid"
-                            alt="static caravan">
+        <section>
+            <!-- displays image -->
+            <div class="row text-center">
+                <div class="col-12 col-md-8 mx-auto mb-5">
+                    <img src="{{ listing.image }}" class="img-fluid"
+                                alt="static caravan">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 mx-auto">
-                <div class="row">
-                    <div class="col-12 col-md-3">
-                        <h1 class="mb-4">£{{ listing.price }}</h1>
-                        <h2 class="mb-5">{{ listing.make|capitalize }} {{ listing.model|capitalize }}</h2>
-                    </div>
-                    <div class="col-12 col-md-6"></div>
-                    <div class="col-12 col-md-3 d-flex flex-column">
-                        <h6 class="mb-3 title-2"><strong>Contact Seller:</strong></h6>
-                        <button type="submit" class="btn btn-primary btn-sm mb-2 rounded-0" id="seller-phone-button">Phone</button>
-                        <button type="submit" class="btn btn-primary btn-sm mb-2 d-none rounded-0" id="seller-phone-number">{{ user.phone }}</button>
-                        <button type="submit" class="btn btn-primary btn-sm rounded-0" id="seller-email-button">Email</button>
-                        <button type="submit" class="btn btn-primary btn-sm d-none rounded-0" id="seller-email">{{ user.email }}</button>
-                        <div class="mt-3">
-                            <i class="fa-solid fa-location-dot me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Location"></i>
-                                <strong class="me-2 title-2">Location:</strong> {{ listing.location|capitalize }}
+            <div class="row">
+                <div class="col-12 col-md-8 mx-auto">
+                    <div class="row">
+                        <!-- displays price, caravan make and model -->
+                        <div class="col-12 col-md-3">
+                            <h1 class="mb-4">£{{ listing.price }}</h1>
+                            <h2 class="mb-5">{{ listing.make|capitalize }} {{ listing.model|capitalize }}</h2>
                         </div>
-                    </div>
-                    <div class="row mt-5 mt-md-0 mb-5">
-                        <div class="col-12">
-                            <h4 class="mb-3">Features:</h4>
-                            <div class="row mx-auto mb-3">
-                                <div class="col-12 col-md-3">
-                                    <i class="fa-solid fa-bed me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Bedrooms"></i>
-                                        Bedrooms: {{ listing.beds }}
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <i class="fa-solid fa-users me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Sleeps"></i> 
-                                        Sleeps: {{ listing.sleeps }}
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <i class="fa-solid fa-calendar me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Year"></i>
-                                        Year: {{ listing.year }}
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <i class="fa-solid fa-maximize me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Size"></i>
-                                        Size: {{ listing.length }}ft x {{ listing.width }}ft
-                                </div>
+                        <div class="col-12 col-md-6"></div>
+                        <div class="col-12 col-md-3 d-flex flex-column">
+                            <h6 class="mb-3 title-2"><strong>Contact Seller:</strong></h6>
+                            <!-- reveals seller phone and email when button clicked -->
+                            <button type="submit" class="btn btn-primary btn-sm mb-2 rounded-0" id="seller-phone-button">Phone</button>
+                            <button type="submit" class="btn btn-primary btn-sm mb-2 d-none rounded-0" id="seller-phone-number">{{ user.phone }}</button>
+                            <button type="submit" class="btn btn-primary btn-sm rounded-0" id="seller-email-button">Email</button>
+                            <button type="submit" class="btn btn-primary btn-sm d-none rounded-0" id="seller-email">{{ user.email }}</button>
+                            <!-- displays location -->
+                            <div class="mt-3">
+                                <i class="fa-solid fa-location-dot me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Location"></i>
+                                    <strong class="me-2 title-2">Location:</strong> {{ listing.location|capitalize }}
                             </div>
-                            <div class="row mx-auto">
-                                {% for feature in listing.features %}
+                        </div>
+                        <div class="row mt-5 mt-md-0 mb-5">
+                            <div class="col-12">
+                                <h4 class="mb-3">Features:</h4>
+                                <div class="row mx-auto mb-3">
+                                    <!-- bedrooms -->
                                     <div class="col-12 col-md-3">
-                                        <i class="fa-solid fa-check me-2"></i>
-                                        {{ feature }}
+                                        <i class="fa-solid fa-bed me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Bedrooms"></i>
+                                            Bedrooms: {{ listing.beds }}
                                     </div>
-                                {% endfor %}
+                                    <!-- sleeps -->
+                                    <div class="col-12 col-md-3">
+                                        <i class="fa-solid fa-users me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Sleeps"></i> 
+                                            Sleeps: {{ listing.sleeps }}
+                                    </div>
+                                    <!-- year -->
+                                    <div class="col-12 col-md-3">
+                                        <i class="fa-solid fa-calendar me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Year"></i>
+                                            Year: {{ listing.year }}
+                                    </div>
+                                    <!-- size -->
+                                    <div class="col-12 col-md-3">
+                                        <i class="fa-solid fa-maximize me-2" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Size"></i>
+                                            Size: {{ listing.length }}ft x {{ listing.width }}ft
+                                    </div>
+                                </div>
+                                <div class="row mx-auto">
+                                    <!-- loops through each feature and displays them -->
+                                    {% for feature in listing.features %}
+                                        <div class="col-12 col-md-3">
+                                            <i class="fa-solid fa-check me-2"></i>
+                                            {{ feature }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row mb-5">
-                        <h4 class="mb-3">Description</h4>
-                        <p>{{ listing.description }}</p>
-                    </div>
-                </div> 
+                        <!-- description only displayed here - gives more detailed information for user -->
+                        <div class="row mb-5">
+                            <h4 class="mb-3">Description</h4>
+                            <p>{{ listing.description }}</p>
+                        </div>
+                    </div> 
+                </div>
             </div>
-        </div>
+        </section>
     </div>
 
 {% endblock %}

@@ -1,16 +1,18 @@
 {% extends "base_templates/base.html" %}
 {% block content %}
 
+<!-- buy section -->
 <section id="buy-section">
     <div class="row d-flex pb-5 pt-5 bg-color-4">
         <div class="col-12 d-flex flex-column ms-5">
             <h1 class="text-capitalize pt-5 title-1">Sell your static caravan <span class="underline">your way</span></h1>
             <p class="pb-3 mt-3">At Caravansy, we look for new, innovative ways to sell your caravan. Let's us do the work for you, matching buyers with sellers in unique, convienient ways.</p>
-            {% if session.user %}
-                <a class="btn btn-primary rounded-0 mt-3 mb-5 align-self-start" href="{{ url_for('add_listing') }}" role="button">List Caravan</a>
-            {% else %}
-                <a class="btn btn-primary rounded-0 mt-3 mb-5 align-self-start" href="{{ url_for('register') }}" role="button">List Caravan</a>
-            {% endif %}
+                <!-- displays different button and directs to different route depending if a user is logged in or not -->
+                {% if session.user %}
+                    <a class="btn btn-primary rounded-0 mt-3 mb-5 align-self-start" href="{{ url_for('add_listing') }}" role="button">List Caravan</a>
+                {% else %}
+                    <a class="btn btn-primary rounded-0 mt-3 mb-5 align-self-start" href="{{ url_for('register') }}" role="button">List Caravan</a>
+                {% endif %}
         </div>
     </div>
     <div class="row d-flex mb-5 negative-margin">
@@ -19,6 +21,7 @@
         </div>
     </div>
 </section>
+<!-- how it works section -->
 <section id="how-it-works-section">
     <div class="row mt-5 mb-5 pt-5 ps-5 pe-5 ms-md-5 me-md-5">
         <div class="col-12 col-lg-6 ps-5">
@@ -29,6 +32,7 @@
                 <li class="ms-4 mb-3">Put your listing in front of 1000s of viewers</li>
                 <li class="ms-4 mb-3">Buyers will contact you directly</li>
             </ul>
+            <!-- displays different button and directs to different route depending if a user is logged in or not -->
             {% if session.user %}
                 <a class="btn btn-primary rounded-0 mb-2 align-self-start" href="{{ url_for('add_listing') }}" role="button">List Caravan</a>
             {% else %}

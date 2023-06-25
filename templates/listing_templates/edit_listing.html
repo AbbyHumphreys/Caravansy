@@ -1,6 +1,7 @@
 {% extends "base_templates/base.html" %}
 {% block content %}
 
+<!-- edit listing form -->
 <section>
     <div class="container-fluid">
         <div class="row">
@@ -12,9 +13,11 @@
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
                 <form method="POST" enctype="multipart/form-data" class="mb-5">
+                    <!-- caravan make -->
                     <div class="mb-3">
                         <label for="make" class="form-label">Make:</label>
                         <select class="form-select" id="make" name="make" aria-label="Choose Caravan Make" required>
+                            <!-- loops through caravan makes and displays in a drop down -->
                             <option disabled selected>Choose Make:</option>
                             {% for make in makes %}
                                 {% if make.caravan_make == listing.make %}
@@ -25,9 +28,11 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <!-- caravan model -->
                     <div class="mb-3">
                         <label for="model" class="form-label">Model:</label>
                         <select class="form-select" id="model" name="model" aria-label="Choose Caravan Model" required>
+                            <!-- loops through caravan models and displays in a drop down -->
                             <option disabled selected>Choose Model:</option>
                             {% for model in models %}
                                 {% if model.caravan_model == listing.model %}
@@ -38,33 +43,41 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <!-- year -->
                     <div class="mb-3">
                         <label for="year" class="form-label">Year:</label>
                         <input type="number" class="form-control" value="{{ listing.year }}" id="year" name="year" minlength="4" maxlength="4" required>
                     </div>
+                    <!-- price -->
                     <div class="mb-3">
                         <label for="price" class="form-label">Price (£):</label>
                         <input type="number" class="form-control" value="{{ listing.price }}" id="price" name="price" minlength="1" maxlength="8" required>
                     </div>
+                    <!-- beds -->
                     <div class="mb-3">
                         <label for="beds" class="form-label">Bedrooms:</label>
                         <input type="number" class="form-control" value="{{ listing.beds }}" id="beds" name="beds" minlength="1" maxlength="1" required>
                     </div>
+                    <!-- sleeps -->
                     <div class="mb-3">
                         <label for="sleeps" class="form-label">Sleeps:</label>
                         <input type="number" class="form-control" value="{{ listing.sleeps }}" id="sleeps" name="sleeps" minlength="1" maxlength="2" required>
                     </div>
+                    <!-- length -->
                     <div class="mb-3">
                         <label for="length" class="form-label">Length (ft):</label>
                         <input type="number" class="form-control" value="{{ listing.length }}" id="length" name="length" minlength="2" maxlength="2" required>
                     </div>
+                    <!-- width -->
                     <div class="mb-3">
                         <label for="width" class="form-label">Width (ft):</label>
                         <input type="number" class="form-control" value="{{ listing.width }}" id="width" name="width" minlength="2" maxlength="2" required>
                     </div>
+                    <!-- location -->
                     <div class="mb-3">
                         <label for="location" class="form-label">Location:</label>
                         <select class="form-select" id="location" name="location" aria-label="Choose Location" required>
+                            <!-- loops through locations and displays in a drop down -->
                             <option disabled selected>Where is the caravan located:</option>
                             {% for location in locations %}
                                 {% if location.location == listing.location %}
@@ -75,14 +88,17 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <!-- description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
                         <textarea class="form-control" aria-label="description" id="description" name="description" required>
                             {{- listing.description -}}
                         </textarea>
                     </div>
+                    <!-- image -->
                     <div class="mb-3">
                         <div class="row">
+                            <!-- displays original image -->
                             <div class="col-3">
                                 Image:
                                 <img src="{{ listing.image }}" class="img-thumbnail"
@@ -93,6 +109,7 @@
                                     <input type="url" name="original-image" id="original-image" value="{{ listing.image }}"
                                         pattern="https://.*" size="30"
                                         disabled required>
+                                        <!-- user can replace image by selected this button which reveals a file type input -->
                                         <a class="btn btn-primary rounded-0" data-bs-toggle="collapse" href="#replaceButtonCollapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                                             Replace?
                                         </a>

@@ -10,13 +10,16 @@
                         <li class="list-group-item d-inline-flex justify-content-between border-3 border-color-1 rounded-0 mb-1">
                             <h4><i class="fa-solid fa-user"></i> {{ user.username|upper}}</h4>
                             <form method="POST" action="{{ url_for('edit_user', user_id=user._id) }}">
+                                <!-- checks if user is a superuser and displays with the toggle switched to on if they are -->
                                 <div class="form-check form-switch">
                                     {% if user.is_superuser == "on" %}
                                         <input class="form-check-input" type="checkbox" role="switch" id="is_superuser" name="is_superuser" checked>
-                                    {% else %}
+                                    <!-- or displays the toggle as off if they are not -->
+                                        {% else %}
                                         <input class="form-check-input" type="checkbox" role="switch" id="is_superuser" name="is_superuser">
                                     {% endif %}
                                     <label class="form-check-label" for="is_superuser">Superuser</label>
+                                    <!-- Cancel button takes you to previous page -->
                                     <button type="button" class="btn btn-primary rounded-0" onclick="history.back()">Cancel</button>
                                     <button type="submit" class="btn btn-primary rounded-0">Apply</button>
                                 </div>

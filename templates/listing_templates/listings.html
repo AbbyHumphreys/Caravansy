@@ -2,64 +2,83 @@
 {% block content %}
 
     <div class="container-fluid">
-        <div class="row ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
-            <div class="col text-center">
-                <h3 class="mb-5">Find Your Perfect Static Caravan</h3>
-                <p class="mb-0">Browse our selection of privately owned caravans</p>
-                <p class="mb-0">See one you like, click through to see more information</p>
-                <p>Contact the owner either by email or phone</p>
+        <!-- intro section -->
+        <section>
+            <div class="row ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
+                <div class="col text-center">
+                    <h3 class="mb-5">Find Your Perfect Static Caravan</h3>
+                    <p class="mb-0">Browse our selection of privately owned caravans</p>
+                    <p class="mb-0">See one you like, click through to see more information</p>
+                    <p>Contact the owner either by email or phone</p>
+                </div>
             </div>
-        </div>
-        <form method="POST" action="{{ url_for('search', listings=listings) }}" class="ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
-            <div class="mb-3">
-                <label for="query" class="form-label">Search</label>
-                <input type="text" class="form-control" id="query" placeholder="Enter your search query here">
-            </div>
-            <a class="btn btn-primary rounded-0" href="{{ url_for('get_listings') }}" role="button">Clear</a>
-            <button type="submit" class="btn btn-primary rounded-0">Search</button>
-        </form>
-        <div class="row ms-md-2 me-md-2 ms-lg-5 me-lg-5 mb-5 ps-lg-5 pe-lg-5">
-            {% for listing in listings %}
-                <div class="col-lg-4 mb-3 ">
-                    <div class="card h-100 d-flex align-items-stretch">
-                        <div class="card-body">
-                            <img src="{{ listing.image }}" class="card-img-top image-card"
-                            alt="static caravan">
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <h5 class="card-title">{{ listing.make|capitalize}} {{ listing.model|capitalize }}</h5>
+        </section>
+        <!-- search section -->
+        <section>
+            <form method="POST" action="{{ url_for('search') }}" class="ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
+                <div class="mb-3">
+                    <!-- search for make and model -->
+                    <label for="query" class="form-label">Search</label>
+                    <input type="text" class="form-control" id="query" placeholder="Search for make or model">
+                </div>
+                <a class="btn btn-primary rounded-0" href="{{ url_for('get_listings') }}" role="button">Clear</a>
+                <button type="submit" class="btn btn-primary rounded-0">Search</button>
+            </form>
+        </section>
+        <!-- listings section -->
+        <section>
+            <div class="row ms-md-2 me-md-2 ms-lg-5 me-lg-5 mb-5 ps-lg-5 pe-lg-5">
+                <!-- loops through listings and displays html for each one -->
+                {% for listing in listings %}
+                    <div class="col-lg-4 mb-3 ">
+                        <div class="card h-100 d-flex align-items-stretch">
+                            <div class="card-body">
+                                <img src="{{ listing.image }}" class="card-img-top image-card"
+                                alt="static caravan">
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <!-- capitalize used for aesthetic purposes -->
+                                        <!--displays caravan make and model-->
+                                        <h5 class="card-title">{{ listing.make|capitalize}} {{ listing.model|capitalize }}</h5>
+                                    </div>
+                                    <!-- displays price -->
+                                    <div class="col-6 text-end">
+                                        <h5 class="card-title">£{{ listing.price }}</h5>
+                                    </div>
+                                    <!-- displays caravan size -->
+                                    <p class="paragraph-card">Size: {{ listing.length }}ft x {{ listing.width }}ft</p>
                                 </div>
-                                <div class="col-6 text-end">
-                                    <h5 class="card-title">£{{ listing.price }}</h5>
+                                <div class="row mb-3">
+                                    <!-- bedrooms -->
+                                    <div class="col-4">
+                                        <i class="fa-solid fa-bed me-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Bedrooms"></i>
+                                        {{ listing.beds }}
+                                    </div>
+                                    <!-- maximum it can sleep -->
+                                    <div class="col-4 text-center">
+                                        <i class="fa-solid fa-users me-3"></i> 
+                                        {{ listing.sleeps }}
+                                    </div>
+                                    <!-- location -->
+                                    <div class="col-4 text-end">
+                                        <i class="fa-solid fa-location-dot me-3"></i>
+                                        {{ listing.location|capitalize }}
+                                    </div>
                                 </div>
-                                <p class="paragraph-card">Size: {{ listing.length }}ft x {{ listing.width }}ft</p>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-4">
-                                    <i class="fa-solid fa-bed me-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Bedrooms"></i>
-                                    {{ listing.beds }}
-                                </div>
-                                <div class="col-4 text-center">
-                                    <i class="fa-solid fa-users me-3"></i> 
-                                    {{ listing.sleeps }}
-                                </div>
-                                <div class="col-4 text-end">
-                                    <i class="fa-solid fa-location-dot me-3"></i>
-                                    {{ listing.location|capitalize }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-12">
-                                    <a href="{{ url_for('display_listing', listing_id=listing._id, user=user) }}" class="btn btn-primary card-link rounded-0">See More</a>
+                            <!-- takes user to a page with more information on the caravan clicked -->
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="{{ url_for('display_listing', listing_id=listing._id, user=user) }}" class="btn btn-primary card-link rounded-0">See More</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        </section>
     </div>
 
 {% endblock %}

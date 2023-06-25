@@ -1,10 +1,12 @@
 {% extends "base_templates/base.html" %}
 {% block content %}
 
+<!-- list a caravan section -->
 <section id="list-a-caravan-section">
     <div class="row d-flex mb-5">
         <div class="col-12 col-lg-4 d-flex flex-column my-auto">
             <h1 class="text-capitalize ms-5">A better way to sell your <span class="underline"><br>static caravan</span></h1>
+            <!-- chaanges button and route call depending on whether a user is logged in or not -->
             {% if session.user %}
                 <a class="btn btn-primary rounded-0 mt-5 align-self-start ms-5" href="{{ url_for('add_listing') }}" role="button">List Caravan</a>
             {% else %}
@@ -16,6 +18,7 @@
         </div>
     </div>
 </section>
+<!-- seperator section -->
 <section id="seperator">
     <div class="row bg-color-2 txt-color-2 pt-5 pb-5">
         <div class="col-4">
@@ -29,6 +32,7 @@
         </div>
     </div>
 </section>
+<!-- buy a caravan section -->
 <section id="buy-a-caravan-section">
     <div class="row d-flex mt-5 mb-5">
         <div class="col-12 col-lg-8">

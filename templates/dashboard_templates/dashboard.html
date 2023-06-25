@@ -5,13 +5,16 @@
             <div class="col-12 col-lg-6">
                 <h4 class="">Your Listings</h4>
             </div>
+            <!-- add listing link -->
             <div class="col-12 col-lg-6 text-end">
                 <a class="btn btn-primary rounded-0" href="{{ url_for('add_listing') }}" role="button">
                     Add Caravan Listing
                 </a>
             </div>
         </div>
+        <!-- create table -->
         <table class="table">
+            <!-- table headers -->
             <thead>
                 <tr>
                     <th scope="col">Make</th>
@@ -23,15 +26,19 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- loops through each listing -->
                 {% for listing in listings %}
+                    <!-- filters to display only listings created by the current user -->
                     {% if session.user|lower == listing.created_by|lower %}
                         <tr>
+                            <!-- displays relevant details -->
                             <td>{{ listing.make|capitalize }}</td>
                             <td>{{ listing.model|capitalize }}</td>
                             <td>{{ listing.length }} x {{ listing.width }}</td>
                             <td>{{ listing.year }}</td>
                             <td>{{ listing.price }}</td>
                             <td>
+                                <!-- dropdown button -->
                                 <div class="dropdown">
                                     <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0 rounded-0"
                                         type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,11 +46,12 @@
                                     </button>
                                     <ul class="dropdown-menu rounded-0">
                                         <li>
+                                            <!-- edit listing -->
                                             <a class="dropdown-item"
                                                 href="{{ url_for('edit_listing', listing_id=listing._id) }}">Edit</a>
                                         </li>
                                         <li>
-                                            <!-- Button opening modal -->
+                                            <!-- Button opening modal to check if want to complete destructive action -->
                                             <a href="#modal-{{ listing._id }}" class="dropdown-item"
                                                 data-bs-toggle="modal">Delete</a>
                                         </li>
@@ -59,8 +67,10 @@
                                     <p class="ms-5">Are you sure you want to delete the listing permanently?</p>
                                     <p class="text-danger ms-5">NOTICE: You cannot undo this action.</p>
                                     <div class="modal-footer">
+                                        <!-- completes delete action -->
                                         <a href="{{ url_for('delete_listing', listing_id=listing._id) }}" role="button"
                                             class="btn btn-danger rounded-0">Delete</a>
+                                            <!-- takes user back to listings -->
                                         <a href="{{ url_for('dashboard', username=username) }}" role="button"
                                             class="btn btn-outline-primary rounded-0" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
                                     </div>

@@ -6,7 +6,9 @@
                 <h4 class="">User's</h4>
             </div>
         </div>
+        <!-- create table -->
         <table class="table">
+            <!-- table headers -->
             <thead>
                 <tr>
                     <th scope="col">User</th>
@@ -15,12 +17,14 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- loops through users and displays them -->
                 {% for user in users %}
                     <tr>
                         <td><i class="fa-solid fa-user align-self-center p-2"></i>
                             {{ user.username|capitalize }}
                         </td>
                         <td>
+                            <!-- checks if user is a superuser and slides the toggle to on if they are -->
                             {% if user.is_superuser == "on" %}
                             Super User
                             {% endif %}
@@ -28,17 +32,20 @@
                         <td>
                             <form method="POST"
                                 action="{{ url_for('get_users', username=session['user'], user_id=session['user']) }}">
+                                <!-- creates a dropdown button for editing and deleting a user -->
                                 <div class="dropdown">
                                     <button class="btn btn-secondary bg-color-1 txt-color-2 border border-0 rounded-0"
                                         type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis"></i>
                                     </button>
                                     <ul class="dropdown-menu rounded-0">
-                                        <li><a class="dropdown-item"
-                                                href="{{ url_for('edit_user', user_id=user._id) }}">Edit</a>
+                                        <!-- edit user link -->
+                                        <li>
+                                            <a class="dropdown-item" href="{{ url_for('edit_user', user_id=user._id) }}">Edit</a>
                                         </li>
-                                        <li><a class="dropdown-item"
-                                                href="{{ url_for('delete_user', user_id=user._id) }}">Delete</a>
+                                        <!-- delete user link -->
+                                        <li>
+                                            <a class="dropdown-item" href="{{ url_for('delete_user', user_id=user._id) }}">Delete</a>
                                         </li>
                                     </ul>
                                 </div>

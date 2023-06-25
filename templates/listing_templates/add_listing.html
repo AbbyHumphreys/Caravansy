@@ -3,6 +3,7 @@
 
 <section>
     <div class="container-fluid">
+        <!-- header -->
         <div class="row">
             <div class="col-12 text-center">
                 <h2>Add Caravan Listing</h2>
@@ -11,20 +12,25 @@
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
+                <!-- form for adding a new caravan listing -->
                 <form method="POST" enctype="multipart/form-data" class="mb-5">
+                    <!-- caravn make -->
                     <div class="mb-3">
                         <label for="make" class="form-label">Make:</label>
                         <select class="form-select" id="make" name="make" aria-label="Choose Caravan Make" required>
                             <option disabled selected>Choose Make:</option>
+                            <!-- loops through makes and displays a dropdown list of them all -->
                             {% for make in makes %}
                                 <option value="{{ make.caravan_make }}">{{ make.caravan_make|capitalize }}</option>
                             {% endfor %}
                         </select>
                     </div>
+                    <!-- caravan model -->
                     <div class="mb-3">
                         <label for="model" class="form-label">Model:</label>
                         <select class="form-select" id="model" name="model" aria-label="Choose Caravan Model" required>
                             <option disabled selected>Choose Model:</option>
+                            <!-- loops through models and displays a dropdown list of them all -->
                             {% for model in models %}
                                 <option value="{{ model.caravan_model }}">{{ model.caravan_model|capitalize }}</option>
                             {% endfor %}
@@ -32,55 +38,70 @@
                     </div>
                     <!-- step attribute for allowing decimals researched from this website:
                     https://stackoverflow.com/questions/24163889/html5-input-for-money-currency -->
+                    <!-- price -->
                     <div class="mb-3">
                         <label for="price" class="form-label">Price (£):</label>
                         <input type="number" step="any" class="form-control" id="price" name="price" minlength="1" maxlength="8" required>
                     </div>
+                    <!-- year -->
                     <div class="mb-3">
                         <label for="year" class="form-label">Year:</label>
                         <input type="number"class="form-control" id="year" name="year" minlength="4" maxlength="4" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
+                    <!-- bedrooms -->
                     <div class="mb-3">
                         <label for="beds" class="form-label">Bedrooms:</label>
                         <input type="number" class="form-control" id="beds" name="beds" minlength="1" maxlength="1" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
+                    <!-- sleeps -->
                     <div class="mb-3">
                         <label for="sleeps" class="form-label">Sleeps:</label>
                         <input type="number" class="form-control" id="sleeps" name="sleeps" minlength="1" maxlength="1" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
+                    <!-- length -->
                     <div class="mb-3">
                         <label for="length" class="form-label">Length (ft):</label>
                         <input type="number" class="form-control" id="length" name="length" minlength="2" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
+                    <!-- width -->
                     <div class="mb-3">
                         <label for="width" class="form-label">Width (ft):</label>
                         <input type="number" class="form-control" id="width" name="width" minlength="2" maxlength="2" oninput="this.value=this.value.slice(0,this.maxLength);" required>
                     </div>
+                    <!-- location -->
                     <div class="mb-3">
                         <label for="location" class="form-label">Location:</label>
                         <select class="form-select" id="make" name="make" aria-label="Choose Location" required>
                             <option disabled selected>Where is the caravan located:</option>
+                            <!-- loops through locations and displays a dropdown list of them all -->
                             {% for location in locations %}
                                 <option value="{{ location.location }}">{{ location.location|capitalize }}</option>
                             {% endfor %}
                           </select>
                     </div>
+                    <!-- features -->
+                    <!-- loops through features and displays a checkbox for all of them -->
                     {% for feature in features %}
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="features" name="features" value="{{ feature.feature_name }}">
                             <label class="form-check-label" for="features">{{ feature.feature_name}}</label>
                         </div>
                     {% endfor %}
+                    <!-- description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">Description:</label>
                         <textarea class="form-control" aria-label="description" id="description" name="description" required></textarea>
                     </div>
+                    <!-- image -->
+                    <!-- opens window to choose image to upload to cloudinary api -->
                     <div class="mb-3">
+                        <p class="text-red-500 mb-4" id="error"></p>
+                        <p class="text-green-500 mb-4" id="success"></p>
                         <label for="image" class="form-label">Upload Image:</label>
                         <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
                     </div>
                     <button type="button" class="btn btn-primary rounded-0" onclick="history.back()">Cancel</button>
-                    <button type="submit" class="btn btn-primary rounded-0">Submit</button>
+                    <button type="submit" class="btn btn-primary rounded-0" id="submit-button">Submit</button>
                 </form>
             </div>
             <div class="col-lg-3"></div>
