@@ -342,8 +342,11 @@ def caravan_details(username):
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """
+    creates a text search on make and model of a caravan
+    """
     query = request.form.get("query")
-    listings = mongo.db.listings.find({"$text": {"$search": query}})
+    listings = str(mongo.db.listings.find({"$text": {"$search": query}}))
     return render_template(
         "listing_templates/listings.html", listings=listings)
 
