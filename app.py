@@ -347,6 +347,9 @@ def search():
     """
     query = request.form.get("query")
     listings = list(mongo.db.listings.find({"$text": {"$search": query}}))
+    if len(listings) == 0:
+        flash("Sorry, there are no results!")
+        return redirect(url_for("get_listings"))
     return render_template(
         "listing_templates/listings.html", listings=listings)
 
