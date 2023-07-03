@@ -11,7 +11,7 @@
         <div class="accordion accordion-flush" id="caravan_details">
             <!-- CARAVAN MAKE ROW -->
             <div class="accordion-item">
-                <h2 class="accordion-header d-flex justify-content-between"></h2>
+                <h2 class="accordion-header">
                     <div class="row">
                         <div class="col-10">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -46,7 +46,7 @@
                                                     <li><a class="dropdown-item" href="{{ url_for('edit_make', make_id=make._id) }}">Edit</a></li>
                                                     <!-- DELETE BUTTON -->
                                                     <!-- Button opens modal -->
-                                                    <li><a href="#modal-{{ make._id }}" class="dropdown-item"data-bs-toggle="modal">Delete</a></li>
+                                                    <li><a href="#modal-{{ make._id }}" class="dropdown-item" data-bs-toggle="modal">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -175,7 +175,7 @@
                                                     <li><a class="dropdown-item" href="{{ url_for('edit_feature', feature_id=feature._id) }}">Edit</a></li>
                                                     <!-- DELETE BUTTON -->
                                                     <!-- Button opens modal -->
-                                                    <li><a href="#modal-{{ feature._id }}" class="dropdown-item"data-bs-toggle="modal">Delete</a></li>
+                                                    <li><a href="#modal-{{ feature._id }}" class="dropdown-item" data-bs-toggle="modal">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </li>
