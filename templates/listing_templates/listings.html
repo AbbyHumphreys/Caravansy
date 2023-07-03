@@ -15,11 +15,11 @@
         </section>
         <!-- search section -->
         <section>
-            <form method="POST" action="{{ url_for('search') }}" class="ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
+            <form action="{{ url_for('search') }}" method="POST" class="ms-2 me-2 ms-lg-5 ps-lg-5 me-lg-5 pe-lg-5 mb-5">
                 <div class="mb-3">
                     <!-- search for make and model -->
                     <label for="query" class="form-label">Search</label>
-                    <input type="text" class="form-control" id="query" placeholder="Search for make or model">
+                    <input type="text" class="form-control" id="query" name="query" placeholder="Search for make or model">
                 </div>
                 <a class="btn btn-primary rounded-0" href="{{ url_for('get_listings') }}" role="button">Clear</a>
                 <button type="submit" class="btn btn-primary rounded-0">Search</button>

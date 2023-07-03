@@ -1,7 +1,7 @@
 # imports dependencies
 import os
 from flask import (
-    Flask, flash, render_template, 
+    Flask, flash, render_template,
     redirect, request, session, url_for, abort)
 from functools import wraps
 from flask_pymongo import PyMongo
@@ -346,7 +346,7 @@ def search():
     creates a text search on make and model of a caravan
     """
     query = request.form.get("query")
-    listings = str(mongo.db.listings.find({"$text": {"$search": query}}))
+    listings = list(mongo.db.listings.find({"$text": {"$search": query}}))
     return render_template(
         "listing_templates/listings.html", listings=listings)
 
