@@ -176,7 +176,7 @@ This page displays more details of the chosen caravan. The user is invited to pr
 
 ![Directors Details](/static/readme-images/pages/about-page-screenshot-directors.webp "Directors Details")
 
-The about page detail information about the history of the comnpany as well as the background of the company's Directors.
+The about page detail information about the history of the company as well as the background of the company's Directors.
 
 
 ### Register Page
@@ -203,3 +203,150 @@ There username is checked against the database and access is given to relevant p
 
 Once logged in, they are redirected to their profile page in their dashboard.
 
+## USER AREA
+
+Once a user is logged on, they can access the following pages. This is due to a wrapper used to decorate routes relating to pages only logged in users can access.
+
+### Dashboard View
+Once logged in a user has access to a new menu item/nav link called dashboard. This takes the user through to their own unique dashboard with a side bar navigation to allow access to their profile and their own listings.
+
+### Profile Page
+
+![Profile Page](/static/readme-images/pages/profile-screenshot.webp "Profile Page")
+
+![Edit Profile Page](/static/readme-images/pages/edit-profile-screenshot.webp "Edit Profile Page")
+
+From here the user can edit their name and contact details. It was important to allow the user to update their contact details as these are available to buyers on the detailed listing page. 
+
+Users are not allowed to edit their username. This is set when they register.
+
+### User Listings
+
+![Listings Page](/static/readme-images/pages/users-listings-screenshot.webp "Listings Page")
+
+![Add Listing Page](/static/readme-images/pages/add-caravan-listing-screenshot.webp "Add Listing Page")
+
+![Edit Listing Page](/static/readme-images/pages/edit-caravan-screenshot.webp "Edit Listing Page")
+
+On first use, this page will be relatively empty. A user must add their first caravan listing using the 'add caravan' button. Once created, this view will show the user their caravan listings in table format and they have the ability to edit or delete their own listings via the ellipsis button.
+
+## SUPER USER VIEWS
+
+If a user is granted superuse priviledges via another superuser, they will have more menu items in the side navgation bar in the dashboard. This includes users and caravan details. Again this is achieved through a wrapper that decorates certain routes.
+
+### Users
+
+![Users Page](/static/readme-images/pages/users-screenshot.webp "Users Page")
+
+![Edit User Page](/static/readme-images/pages/edit-users-screenshot.webp "Edit User Page")
+
+This is a simple table that allows super users to grant other users superuser priviledges via a toggle button.
+
+### Caravan Details
+
+![Caravan Details Page](/static/readme-images/pages/caravan-details-screenshot.webp "Caravan Details Page")
+
+![Details Dropdown Page](/static/readme-images/pages/caravan-details-dropdown-screenshot.webp "Details Dropdown Page")
+
+This view brings you to an accordian style page of four dropdown menus for caravan make, model, features and location. It was decided that these inputs on the form fields to add or edit a caravan listings would be best suited to be pre-populated with correct industry items. This prevents mis-spellings of caravan makes and models, regulates features and is specific to location.
+
+### ERROR HANDLERS
+
+![Error Page](/static/readme-images/pages/error-page-screenshot.webp "Error Page")
+
+A single page was created to handle several errors. The error handlers were created in app.py and pass the relevant message to the error page.
+
+# TECHNOLOGIES USED
+## Languages
+* HTML5
+* CSS3
+* Javascript
+* Python
+## Framework
+* Bootstrap v 5.3
+* Flask
+## Database
+* MongoDB
+## Tools
+* Git
+* GitHub
+* Gitpod
+* Balsamiq
+* Google Fonts
+* Font Awesome
+
+# BUGS
+
+## Fixed Bugs
+| No. | Problem | Fix |
+| --- | --- | --- |
+| 1 | Links to edit and delete in listing cards not working | Remove card-overlay that was holding the price. The z-index was the problem. I could’ve reduced the size of the card-overlay, but I changed the location of the price as I preferred the look of it |
+| 2 | Needed wrap decorator for only superuser access for certain pages | https://stackoverflow.com/questions/35407560/attributeerror-dict-object-has-no-attribute-predictors showed me how to access the key in the document. This is located in app.py def superuser_required(f): |
+
+## Known Bugs
+
+
+# TESTING
+Extensive testing was conducted and documented in [Testing.md](TESTING.md)
+
+# WISHLIST
+
+There are many ways this site could be developed in the future to have many more features. Here are some on my wishlist:
+
+- Distinguish between trade and private sellers
+- Allow upload and display of multiple images
+- Provide a way for users to review listing owners
+- See how many people have viewed an owners listing
+- Pagination for the listings on the buy page and on dashboard tables
+
+# DEPLOYMENT
+
+Heroku was use for deploying this app. These are the steps used for deployment to Heroku:
+
+In GitPod CLI, the the root directoy of the project, run: pip3 freeze --local > requirements.txt to create a requirements.txt file containing project dependencies.
+In the Gitpod project workspace root directory, create a new file called Procfile. Inside the Procfile, check that web: python3 app.py has been added when creating the file Save the file.
+
+Login to Heroku, select Create new app, add a name for the app and choose the region closest to you.
+go to the 'Deploy' tab on the Heroku dashboard and select Github, search for your repository and click 'connect'.
+Navigate to the settings tab, click reveal config vars and input the the following:
+Key	Value
+* "IP", "0.0.0.0"
+* "PORT", 5000
+* "SECRET_KEY", "secret key"
+* "MONGO_URI", "mongo db uri"
+* "MONGO_DBNAME", "mongo db name"
+* "CLOUD_NAME", "cloudinary name"
+* "API_KEY", "api key"
+* "API_SECRET", "secret key"
+
+Go back to the Deploy tab and select enable automatic deploys. Click deploy branch and then open app once the build is complete.
+
+Fork the repository by logging into Github and locating the repository. Click the Fork button in the top right corner. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link. In the terminal change the current working directory to the location you want to use for the cloned directory. Type git clone, and paste the URL you copied and press enter.
+
+# CREDITS
+
+**Code Institute** - I thoroughly enjoyed learning python through Code Insitute and have used guiding principles from the course throughout this website.
+
+**[Font Awesome](https://fontawesome.com/)** -  was used for the icons from the site and instructions were followed on how to install from their website.
+
+**[Tiny PNG](https://tinypng.com/)** - was used to reduce the file size of each image.
+
+**[Adobe Express](https://express.adobe.com/spv)** - was used to resize the images.
+
+**[Google Fonts](https://fonts.google.com/)** - were the source for the fonts used throughout the site.
+
+**[Online-Convert](https://image.online-convert.com/)** - was used to convert the files to webp.
+
+**[Bootstrap](https://getbootstrap.com/docs/5.3/components/modal/)** - Was used for most of the styling and responsiveness.
+
+**[Flask](https://getbootstrap.com/docs/5.3/components/modal/)** - Was used for most of the styling and responsiveness.
+
+**[Jinja Templating](https://getbootstrap.com/docs/5.3/components/modal/)** - Was used for templating and template logic in the templates.
+
+**[MongoDB](https://getbootstrap.com/docs/5.3/components/modal/)** - Was used for the database.
+
+**[Heroku](https://getbootstrap.com/docs/5.3/components/modal/)** - Was used for deployment.
+
+**[Am I Reponsive](https://ui.dev/amiresponsive)** - was used to create the first image in the readme file to show the responsiveness of the website.
+
+All other text and coding was created by myself.
