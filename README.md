@@ -349,4 +349,10 @@ Fork the repository by logging into Github and locating the repository. Click th
 
 **[Am I Reponsive](https://ui.dev/amiresponsive)** - was used to create the first image in the readme file to show the responsiveness of the website.
 
+**[Swift Caravan Details](https://www.swiftholidayhomes.co.uk/)** - Swift caravan images and text taken from this website for educational purposes only
+
+**[Willerby Caravan Details](https://www.willerby.com/)** - Willerby caravan images and text taken from this website for educational purposes only
+
+**[Delta Caravan Details](https://www.deltacaravans.co.uk/index.html)** - Delta caravan images and text taken from this website for educational purposes only
+
 All other text and coding was created by myself.
