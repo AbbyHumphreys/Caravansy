@@ -57,26 +57,26 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </td>
-                        </tr>
-                        <!-- Destructive Action Modal -->
-                        <div class="modal fade" id="modal-{{ listing._id }}" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <h2 class="modal-title pt-3 ms-5 pb-4">DELETE LISTING</h2>
-                                    <p class="ms-5">Are you sure you want to delete the listing permanently?</p>
-                                    <p class="text-danger ms-5">NOTICE: You cannot undo this action.</p>
-                                    <div class="modal-footer">
-                                        <!-- completes delete action -->
-                                        <a href="{{ url_for('delete_listing', listing_id=listing._id) }}" role="button"
-                                            class="btn btn-danger rounded-0">Delete</a>
-                                            <!-- takes user back to listings -->
-                                        <a href="{{ url_for('dashboard', username=username) }}" role="button"
-                                            class="btn btn-outline-primary rounded-0" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                <!-- Destructive Action Modal -->
+                                <div class="modal fade" id="modal-{{ listing._id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <h2 class="modal-title pt-3 ms-5 pb-4">DELETE LISTING</h2>
+                                            <p class="ms-5">Are you sure you want to delete the listing permanently?</p>
+                                            <p class="text-danger ms-5">NOTICE: You cannot undo this action.</p>
+                                            <div class="modal-footer">
+                                                <!-- completes delete action -->
+                                                <a href="{{ url_for('delete_listing', listing_id=listing._id) }}" role="button"
+                                                    class="btn btn-danger rounded-0">Delete</a>
+                                                    <!-- takes user back to listings -->
+                                                <a href="{{ url_for('dashboard', username=username) }}" role="button"
+                                                    class="btn btn-outline-primary rounded-0" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
                     {% endif %}
                 {% endfor %}
             </tbody>
