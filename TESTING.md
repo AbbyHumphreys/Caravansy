@@ -11,6 +11,7 @@
 | Search - No Results | Display flash message explaining no results | Pass |
 | Choose caravan detail from dropdown list | Make, model, features and location chosen through dropdown list | Pass |
 | Check navigation links | Navigation links render correct pages | Pass |
+| Check forms submit | Log to database / render correctly | Pass |
 | Dashboard displays as expected | Sidebar links render correctly | Pass |
 | Logged in user redirect correct | User redirected to profile page | Pass |
 | Logged in user can access two dashboard pages | Access profile page and their listings page | Pass |
