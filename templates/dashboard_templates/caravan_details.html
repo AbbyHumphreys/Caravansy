@@ -1,6 +1,6 @@
 {% extends "base_templates/dashboard_sidebar.html" %}
 {% block dashboard_section %}
-    <div class="col-12 col-lg-9 ps-5 pe-5 mt-5">
+    <div class="col-12 col-lg-9 ps-lg-5 pe-lg-5 mt-5">
         <div class="row mb-4">
             <!-- HEADING -->
             <div class="col-12">
@@ -12,16 +12,16 @@
             <!-- CARAVAN MAKE ROW -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <div class="row">
-                        <div class="col-10">
+                    <div class="row w-100">
+                        <div class="col-8 col-lg-10">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             Caravan Makes
                             </button>
                         </div>
                         <!-- ADD CARAVAN MAKE BUTTON -->
-                        <div class="col-2">
-                            <a class="btn btn-primary rounded-0 align-items-end" href="{{ url_for('add_make') }}" role="button">Add Make</a>
+                        <div class="col-4 col-lg-2">
+                            <a class="btn btn-primary rounded-0 align-items-end w-100" href="{{ url_for('add_make') }}" role="button">Add Make</a>
                         </div>
                     </div>
                 </h2>
@@ -77,16 +77,16 @@
             <!-- CARAVAN MODEL ROW -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <div class="row">
-                        <div class="col-10">
+                    <div class="row w-100">
+                        <div class="col-8 col-lg-10">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 Caravan Models
                             </button>
                         </div>
                         <!-- ADD CARAVAN MODEL BUTTON -->
-                        <div class="col-2">
-                            <a class="btn btn-primary rounded-0 align-items-end" href="{{ url_for('add_model') }}" role="button">Add Model</a>
+                        <div class="col-4 col-lg-2">
+                            <a class="btn btn-primary rounded-0 align-items-end w-100" href="{{ url_for('add_model') }}" role="button">Add Model</a>
                         </div>
                     </div>
                 </h2>
@@ -142,24 +142,24 @@
             <!-- CARAVAN FEATURES ROW -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <div class="row">
+                    <div class="row w-100">
                         <!-- ADD CARAVAN FEATURE BUTTON -->
-                        <div class="col-10">
+                        <div class="col-8 col-lg-10">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 Caravan Features
                             </button>
                         </div>
-                        <div class="col-2">
-                            <a class="btn btn-primary rounded-0 align-items-end" href="{{ url_for('add_feature') }}" role="button">Add Feature</a>
+                        <div class="col-4 col-lg-2">
+                            <a class="btn btn-primary rounded-0 align-items-end w-100" href="{{ url_for('add_feature') }}" role="button">Add Feature</a>
                         </div>
                     </div>
                 </h2>
                 <!-- DISPLAY CARAVAN FEATURES -->
                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#caravan_details">
                     <div class="accordion-body">
-                        <div class="row">
-                            <div class="col-10">
+                        <div class="row w-100">
+                            <div class="col-8 col-lg-10">
                                 <ul class="list-group">
                                     <!-- loop through caravan models and display them -->
                                     {% for feature in features %}
@@ -206,16 +206,16 @@
             <!-- LOCATION ROW -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <div class="row">
+                    <div class="row w-100">
                         <!-- ADD LOCATION BUTTON -->
-                        <div class="col-10">
+                        <div class="col-8 col-lg-10">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 Locations
                             </button>
                         </div>
-                        <div class="col-2">
-                            <a class="btn btn-primary rounded-0 align-items-end" href="{{ url_for('add_location') }}" role="button">Add Location</a>
+                        <div class="col-4 col-lg-2">
+                            <a class="btn btn-primary rounded-0 align-items-end w-100" href="{{ url_for('add_location') }}" role="button">Add Location</a>
                         </div>
                     </div>
                 </h2>

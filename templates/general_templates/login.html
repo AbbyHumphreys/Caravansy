@@ -4,25 +4,25 @@
     <!-- page for user login -->
     <section id="login-section">
         <div class="row d-flex mb-5">
-            <div class="col-12 col-lg-6 d-flex flex-column my-auto">
-                <h1 class="ms-5">Login</h1>
+            <div class="col-12 col-lg-5 ms-4 me-4 d-flex flex-column my-auto">
+                <h1>Login</h1>
                 <!-- redirect to register page if they haven't created an account -->
-                <p class="ms-5">Don't have an account? <a href="{{ url_for('register') }}" class="underline">Register</a></p>
-                <form method="POST" action="{{ url_for('login') }}">
+                <p>Don't have an account? <a href="{{ url_for('register') }}" class="underline">Register</a></p>
+                <form method="POST" action="{{ url_for('login') }}" class="mb-5">
                     <!-- username -->
-                    <div class="ms-5 mb-3">
+                    <div class="mb-3">
                       <label for="username" class="form-label">Username</label>
                       <input type="text" class="form-control" name="username" id="username" 
                         minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" aria-describedby="username" required>
                     </div>
                     <!-- password -->
-                    <div class="ms-5 mb-3">
+                    <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
                       <input type="password" class="form-control" id="password" minlength="5"
                         maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" name="password" required>
                     </div>
                     <!-- login -->
-                    <button type="submit" class="ms-5 btn btn-primary rounded-0">Log In</button>
+                    <button type="submit" class="btn btn-primary rounded-0">Log In</button>
                   </form>
             </div>
             <!-- image -->

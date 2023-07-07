@@ -185,3 +185,11 @@ strong {
     color: red;
     font-size: 0.8rem;
 }
+
+/*--------------------------------------------------------- Media Queries */
+
+@media only screen and (max-width: 900px) {
+    .sidebar {
+        height: auto;
+    }
+}
