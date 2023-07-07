@@ -27,9 +27,11 @@ app.config["UPLOAD_FOLDER"] = "static/uploads"
 
 
 # fetches cloudinary env variables
-cloudinary.config(cloud_name=os.getenv("CLOUD_NAME"),
-                api_key=os.getenv("API_KEY"),
-                api_secret=os.getenv("API_SECRET"))
+cloudinary.config(
+    cloud_name=os.getenv("CLOUD_NAME"),
+    api_key=os.getenv("API_KEY"),
+    api_secret=os.getenv("API_SECRET")
+)
 
 
 # assigns pymongo app to variable mongo
@@ -109,7 +111,6 @@ def register():
         # check if username or email already exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-        
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
 
@@ -525,7 +526,8 @@ def add_feature():
 
         if existing_feature:
             flash("Feature already exists")
-            return redirect(url_for("caravan_details", username=session['user']))
+            return redirect(
+                url_for("caravan_details", username=session['user']))
 
         feature = {
             "feature_name": request.form.get("feature_name").lower()
@@ -595,7 +597,8 @@ def add_make():
 
         if existing_make:
             flash("Make already exists")
-            return redirect(url_for("caravan_details", username=session['user']))
+            return redirect(
+                url_for("caravan_details", username=session['user']))
 
         make = {
             "caravan_make": request.form.get("caravan_make").lower()
@@ -625,7 +628,8 @@ def edit_make(make_id):
 
         if existing_make:
             flash("Make already exists")
-            return redirect(url_for("caravan_details", username=session['user']))
+            return redirect(
+                url_for("caravan_details", username=session['user']))
 
         submit = {
             "caravan_make": request.form.get("caravan_make").lower()
@@ -674,8 +678,7 @@ def add_model():
         if existing_model:
             flash("Model already exists")
             return redirect(
-                url_for("caravan_details", username=session['user']))
-            
+                url_for("caravan_details", username=session['user']))       
         model = {
             "caravan_model": request.form.get("caravan_model").lower()
         }
@@ -753,8 +756,8 @@ def add_location():
 
         if existing_location:
             flash("Location already exists")
-            return redirect(url_for("caravan_details", username=session['user']))
-           
+            return redirect(
+                url_for("caravan_details", username=session['user']))
         location = {
             "location": request.form.get("location").lower()
         }
@@ -795,7 +798,8 @@ def edit_location(location_id):
         return redirect(url_for("caravan_details", username=session['user']))
     location = mongo.db.locations.find_one({"_id": ObjectId(location_id)})
     return render_template(
-        "dashboard_templates/caravan_details_templates/edit_location.html", location=location)
+        "dashboard_templates/caravan_details_templates/edit_location.html",
+        location=location)
 
 
 # DELETE LOCATION VIEW
@@ -852,6 +856,6 @@ def service_unavailable(e):
 
 
 if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"), 
+    app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
