@@ -102,6 +102,14 @@ As a site owner I want:
 3. add, edit and delete certain caravan details
 
 # DESIGN
+
+## Database Schema
+After working through the user stories and thinking through how the database might work, MongoDB was chosen as the intended database. This is because there were not many relationships between all the tables, mainly each table had one relationship to the listing table. Also, going forward, the flexibility that a non-relational database has fits well with this sites purpose. It will allow messaging in the future between owner and buyer.
+
+The database schema was purposefully kept simple and clean for maintainability and scability reasons. 
+
+![Schema](/static/readme-images/general/database-schema.webp "Schema")
+
 ## Wireframes
 
 The design was to keep the interface as simple and clear as possible. Design conventions were adhered to for ease of use. 
@@ -284,7 +292,8 @@ A single page was created to handle several errors. The error handlers were crea
 | 2 | Needed wrap decorator for only superuser access for certain pages | https://stackoverflow.com/questions/35407560/attributeerror-dict-object-has-no-attribute-predictors showed me how to access the key in the document. This is located in app.py def superuser_required(f): |
 
 ## Known Bugs
-
+- The search feature only searches full words, for example a caravan make is swift, but if you only search for 'swi', it will come back as 'no results', but if you search for 'swift' all the caravans with the make swift will come back.
+- Although the image upload input (when adding or editing a listing) is formatted to accept images and to filter your files by images. It is possible to manually override this and input something that is not an image. This is something I would like to work for future releases. 
 
 # TESTING
 Extensive testing was conducted and documented in [Testing.md](TESTING.md)
@@ -298,6 +307,7 @@ There are many ways this site could be developed in the future to have many more
 - Provide a way for users to review listing owners
 - See how many people have viewed an owners listing
 - Pagination for the listings on the buy page and on dashboard tables
+- The search feature only searches for make and model. In the future, I would like to expand this search to other fields.
 
 # DEPLOYMENT
 
