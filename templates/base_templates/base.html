@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-lg mt-3 mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand ms-4" href="{{ url_for('home') }}">caravan<span class="txt-color-1">sy</span></a>
+                <a class="navbar-brand ms-4" href="{{ url_for('home') }}">caravan<span class="special-character txt-color-1 bg-color-2">sy</span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -55,10 +55,10 @@
                             </li>
                         <!-- hide these nav links if a user is signed in -->
                         {% else %}
-                            <li class="nav-item ms-lg-5 me-1">
-                                <a class="nav-link txt-color-1 " href="{{ url_for('login') }}">Sign In</a>
+                            <li class="nav-item ms-lg-5">
+                                <a class="nav-link txt-color-1 bg-color-2" href="{{ url_for('login') }}">Sign In</a>
                             </li>
-                            <li class="nav-item me-5 bg-color-1">
+                            <li class="nav-item me-lg-5 bg-color-1">
                                 <a class="nav-link" href="{{ url_for('register') }}">Register</a>
                             </li>
                         {% endif %}
