@@ -223,13 +223,6 @@ def edit_profile(user_id):
         if "user" not in session:
             flash("Please log in to edit your profile")
             return redirect(url_for("login"))
-        # check if email already exists in db
-        existing_email = mongo.db.users.find_one(
-            {"email": request.form.get("email").lower()})
-        if existing_email:
-            flash("This email address is already in use")
-            return redirect(url_for(
-                "profile", username=session['user'], user_id=session['user']))
 
         apply = {
             "first_name": request.form.get("first_name"),
