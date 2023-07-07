@@ -17,19 +17,22 @@ Python, Javascript, HTML and CSS will be the languages used to create this websi
     - [`User Experience`](#user-experience)
     - [`User Stories`](#user-stories)
 - [`Design`](#design)
+    - [`Database Schema`](#database-schema)
     - [`Wireframes`](#wireframes)
     - [`Colour`](#colour)
     - [`Typography`](#typography)
     - [`Code Structure`](#code-structure)
     - [`Structure`](#structure)
+    - [`Defensive Design`](#defensive-design)
 - [`Features`](#features)
-    - [`Home Page`](#home-page)
-    - [`Game Page`](#game-page)
-    - [`End Page`](#end-page)
-    - [`404 Error`](#404-error)
+    - [`Unrestricted Areas`](#unrestricted-areas)
+    - [`User Area`](#user-area)
+    - [`Super User Area`](#super-user-area)
+    - [`Error Handlers`](#error-handlers)
 - [`Technologies Used`](#technologies-used)
     - [`Languages`](#languages)
     - [`Framework`](#framework)
+    - [`Database`](#database)
     - [`Tools`](#tools)
 - [`Bugs`](#bugs)
     - [`Fixed Bugs`](#fixed-bugs)
@@ -238,7 +241,7 @@ Users are not allowed to edit their username. This is set when they register.
 
 On first use, this page will be relatively empty. A user must add their first caravan listing using the 'add caravan' button. Once created, this view will show the user their caravan listings in table format and they have the ability to edit or delete their own listings via the ellipsis button.
 
-## SUPER USER VIEWS
+## SUPER USER AREA
 
 If a user is granted superuse priviledges via another superuser, they will have more menu items in the side navgation bar in the dashboard. This includes users and caravan details. Again this is achieved through a wrapper that decorates certain routes.
 
@@ -258,7 +261,7 @@ This is a simple table that allows super users to grant other users superuser pr
 
 This view brings you to an accordian style page of four dropdown menus for caravan make, model, features and location. It was decided that these inputs on the form fields to add or edit a caravan listings would be best suited to be pre-populated with correct industry items. This prevents mis-spellings of caravan makes and models, regulates features and is specific to location.
 
-### ERROR HANDLERS
+## ERROR HANDLERS
 
 ![Error Page](/static/readme-images/pages/error-page-screenshot.webp "Error Page")
 
