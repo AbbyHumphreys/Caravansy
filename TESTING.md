@@ -10,6 +10,9 @@
 | Flash Messages | Messages display in an obvious way to users | Pass |
 | Search - No Results | Display flash message explaining no results | Pass |
 | Choose caravan detail from dropdown list | Make, model, features and location chosen through dropdown list | Pass |
+| Add a caravan detail (make model, features, locations) | Click the add button and add a detail | Pass |
+| Edit a  caravan detail (make model, features, locations) | Click the edit button and edit a detail | Pass |
+| Delete a caravan detail (make model, features, locations) | Click the delete button and delete a detail | Pass |
 | Check navigation links | Navigation links render correct pages | Pass |
 | Check forms submit | Log to database / render correctly | Pass |
 | Dashboard displays as expected | Sidebar links render correctly | Pass |
