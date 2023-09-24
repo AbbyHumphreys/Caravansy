@@ -336,6 +336,19 @@ Go back to the Deploy tab and select enable automatic deploys. Click deploy bran
 
 Fork the repository by logging into Github and locating the repository. Click the Fork button in the top right corner. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link. In the terminal change the current working directory to the location you want to use for the cloned directory. Type git clone, and paste the URL you copied and press enter.
 
+## Forking the Github Repository
+
+* Login to Github and locate the repository
+* Locate the 'Fork' button and click it
+* A copy of the repository should now be in your account
+
+## Cloning the Github Repository
+
+* Login to Github and locate the repository
+* Click on the 'code' button and 'download zip'
+* Extract the zip file on your local machine
+* Run the index.html file in a browser
+
 # CREDITS
 
 **Code Institute** - I thoroughly enjoyed learning python through Code Insitute and have used guiding principles from the course throughout this website.
