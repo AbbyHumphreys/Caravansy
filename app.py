@@ -25,7 +25,6 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 
-
 # fetches cloudinary env variables
 cloudinary.config(
     cloud_name=os.getenv("CLOUD_NAME"),
@@ -525,6 +524,11 @@ def add_feature():
         feature = {
             "feature_name": request.form.get("feature_name").lower()
         }
+        # check for whitespace entry
+        if all(char.isspace() for char in feature['feature_name']):
+            flash("Please enter a feature")
+            return redirect(
+                url_for("caravan_details", username=session['user'])) 
         mongo.db.features.insert_one(feature)
         flash("New Feature Added")
         return redirect(url_for("caravan_details", username=session['user']))
@@ -592,10 +596,15 @@ def add_make():
             flash("Make already exists")
             return redirect(
                 url_for("caravan_details", username=session['user']))
-
+        
         make = {
             "caravan_make": request.form.get("caravan_make").lower()
         }
+        # check for whitespace entry
+        if all(char.isspace() for char in make['caravan_make']):
+            flash("Please enter a make")
+            return redirect(
+                url_for("caravan_details", username=session['user'])) 
         mongo.db.caravan_makes.insert_one(make)
         flash("New Caravan Make Added")
         return redirect(url_for("caravan_details", username=session['user']))
@@ -671,10 +680,15 @@ def add_model():
         if existing_model:
             flash("Model already exists")
             return redirect(
-                url_for("caravan_details", username=session['user']))       
+                url_for("caravan_details", username=session['user']))
         model = {
             "caravan_model": request.form.get("caravan_model").lower()
         }
+        # check for whitespace entry
+        if all(char.isspace() for char in model['caravan_model']):
+            flash("Please enter a model")
+            return redirect(
+                url_for("caravan_details", username=session['user'])) 
         mongo.db.caravan_models.insert_one(model)
         flash("New Caravan Model Added")
         return redirect(url_for("caravan_details", username=session['user']))
@@ -754,6 +768,11 @@ def add_location():
         location = {
             "location": request.form.get("location").lower()
         }
+        # check for whitespace entry
+        if all(char.isspace() for char in location['location']):
+            flash("Please enter a location")
+            return redirect(
+                url_for("caravan_details", username=session['user'])) 
         mongo.db.locations.insert_one(location)
         flash("New Location Added")
         return redirect(url_for("caravan_details", username=session['user']))
@@ -851,4 +870,4 @@ def service_unavailable(e):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)
