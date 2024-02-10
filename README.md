@@ -381,4 +381,4 @@ Fork the repository by logging into Github and locating the repository. Click th
 
 **[Delta Caravan Details](https://www.deltacaravans.co.uk/index.html)** - Delta caravan images and text taken from this website for educational purposes only
 
-All other text and coding was created by myself.
+All other text and coding was created by myself
