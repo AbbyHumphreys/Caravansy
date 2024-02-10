@@ -514,7 +514,7 @@ def add_feature():
     if request.method == "POST":
         # check if caravan  feature already exists in db
         existing_feature = mongo.db.features.find_one(
-            {"feature_name": request.form.get("feature_name")})
+            {"feature_name": request.form.get("feature_name").lower()})
 
         if existing_feature:
             flash("Feature already exists")
@@ -590,7 +590,7 @@ def add_make():
     if request.method == "POST":
         # check if caravan  make already exists in db
         existing_make = mongo.db.caravan_makes.find_one(
-            {"caravan_make": request.form.get("caravan_make")})
+            {"caravan_make": request.form.get("caravan_make").lower()})
 
         if existing_make:
             flash("Make already exists")
@@ -626,7 +626,7 @@ def edit_make(make_id):
     if request.method == "POST":
         # check if caravan  make already exists in db
         existing_make = mongo.db.caravan_makes.find_one(
-            {"caravan_make": request.form.get("caravan_make")})
+            {"caravan_make": request.form.get("caravan_make").lower()})
 
         if existing_make:
             flash("Make already exists")
@@ -675,7 +675,7 @@ def add_model():
     if request.method == "POST":
         # check if caravan  model already exists in db
         existing_model = mongo.db.caravan_models.find_one(
-            {"caravan_model": request.form.get("caravan_model")})
+            {"caravan_model": request.form.get("caravan_model").lower()})
 
         if existing_model:
             flash("Model already exists")
@@ -710,7 +710,7 @@ def edit_model(model_id):
     if request.method == "POST":
         # check if caravan  model already exists in db
         existing_model = mongo.db.caravan_models.find_one(
-            {"caravan_model": request.form.get("caravan_model")})
+            {"caravan_model": request.form.get("caravan_model").lower()})
 
         if existing_model:
             flash("Model already exists")
@@ -759,7 +759,7 @@ def add_location():
     if request.method == "POST":
         # check if location already exists in db
         existing_location = mongo.db.locations.find_one(
-            {"location": request.form.get("location")})
+            {"location": request.form.get("location").lower()})
 
         if existing_location:
             flash("Location already exists")
@@ -794,7 +794,7 @@ def edit_location(location_id):
     if request.method == "POST":
         # check if location already exists in db
         existing_location = mongo.db.locations.find_one(
-            {"location": request.form.get("location")})
+            {"location": request.form.get("location").lower()})
 
         if existing_location:
             flash("Location already exists")
